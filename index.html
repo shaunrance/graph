@@ -59,7 +59,7 @@
 </head>
 <body>
   <svg width="800" height="600"></svg>
-  <button id="add-node-button" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px 16px; font-size: 14px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Node</button>
+  <button id="add-node-button" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px 16px; font-size: 14px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Node</button>
   <div id="sidebar" class="sidebar" style="display: none;">
     <div>
       <h2 id="sidebar-title"></h2>
@@ -81,50 +81,37 @@
     </div>
   </div>
   <script>
-    var categories = {
-      "Ingest": "#69b3a2",
-      "Processing": "#ffcc00",
-      "Distribution": "#ff6666"
-    };
+    let categories = {};
+    let nodes = [];
+    let links = [];
+    let graphData = {};
+    let selectedElement = null;
+    let simulation, link, node, label;
 
-    var nodes = [
-      { id: "Ingest Service", label: "Ingest Service", category: "Ingest", url: "", designer: "", pm: "", eng: "", description: "", updated: "" },
-      { id: "Transcoder", label: "Transcoder", category: "Processing", url: "", designer: "", pm: "", eng: "", description: "", updated: "" },
-      { id: "Asset Storage", label: "Asset Storage", category: "Distribution", url: "", designer: "", pm: "", eng: "", description: "", updated: "" }
-    ];
+    const svg = d3.select("svg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+    const zoomContainer = svg.append("g").attr("class", "zoom-container");
 
-    var links = [
-      { source: "Ingest Service", target: "Transcoder", description: "" }
-    ];
+    const sidebar = document.getElementById("sidebar");
+    const sidebarTitle = document.getElementById("sidebar-title");
+    const nameInput = document.getElementById("name-input");
+    const categorySelect = document.getElementById("category-select");
+    const newCategoryInput = document.getElementById("new-category-input");
+    const urlInput = document.getElementById("url-input");
+    const designerInput = document.getElementById("designer-input");
+    const pmInput = document.getElementById("pm-input");
+    const engInput = document.getElementById("eng-input");
+    const descriptionInput = document.getElementById("description-input");
+    const lastUpdatedText = document.getElementById("last-updated-text");
 
-    var svg = d3.select("svg");
-
+    // Zoom
     var zoom = d3.zoom()
       .scaleExtent([0.1, 5])
       .on("zoom", function(event) {
-        svg.select("g.zoom-container")
-          .attr("transform", event.transform);
+        svg.select("g.zoom-container").attr("transform", event.transform);
       });
-
     svg.call(zoom);
-
-    var zoomContainer = svg.append("g")
-      .attr("class", "zoom-container");
-    var width = +svg.attr("width");
-    var height = +svg.attr("height");
-
-    var sidebar = document.getElementById("sidebar");
-    var sidebarTitle = document.getElementById("sidebar-title");
-    var nameInput = document.getElementById("name-input");
-    var categorySelect = document.getElementById("category-select");
-    var newCategoryInput = document.getElementById("new-category-input");
-    var urlInput = document.getElementById("url-input");
-    var designerInput = document.getElementById("designer-input");
-    var pmInput = document.getElementById("pm-input");
-    var engInput = document.getElementById("eng-input");
-    var descriptionInput = document.getElementById("description-input");
-    var lastUpdatedText = document.getElementById("last-updated-text");
-    var selectedElement = null;
 
     function populateCategorySelect() {
       categorySelect.innerHTML = "";
@@ -164,7 +151,8 @@
           var checkbox = document.createElement("input");
           checkbox.type = "checkbox";
           checkbox.value = n.id;
-          checkbox.checked = links.some(function(l) { return l.source.id === element.id && l.target.id === n.id; });
+          // only check if the link exists and is not a duplicate reverse link
+          checkbox.checked = links.some(function(l) { return l.source === element.id && l.target === n.id; });
           checkbox.style.marginRight = "4px";
           checkbox.style.width = "auto";
           checkbox.style.verticalAlign = "middle";
@@ -197,41 +185,45 @@
         selectedElement.description = descriptionInput.value;
         selectedElement.updated = new Date().toLocaleString();
         lastUpdatedText.textContent = "Last updated: " + selectedElement.updated;
-        localStorage.setItem(selectedElement.id, JSON.stringify(selectedElement));
+
+        // If it's a new node, add it to nodes
         if (!nodes.some(function(n) { return n.id === selectedElement.id; })) {
           selectedElement.x = width / 2 + Math.random() * 100 - 50;
           selectedElement.y = height / 2 + Math.random() * 100 - 50;
           nodes.push(selectedElement);
         }
+
+        // Update links
         var connectToSelect = document.getElementById("connect-to-select");
         var selectedConnections = Array.from(connectToSelect.querySelectorAll('input[type=checkbox]:checked')).map(function(cb) { return cb.value; });
-        links = links.filter(function(l) { return l.source.id !== selectedElement.id && l.target.id !== selectedElement.id; });
+
+        // Remove all links from this node
+        links = links.filter(function(l) { return l.source !== selectedElement.id; });
+        // Add new forward links
         selectedConnections.forEach(function(targetId) {
           links.push({ source: selectedElement.id, target: targetId, description: "" });
-          links.push({ source: targetId, target: selectedElement.id, description: "" });
         });
-        restartSimulation();
 
-        // Export graph data as JSON file
-        const graphData = {
-          nodes: nodes.map(n => ({
-            id: n.id,
-            label: n.label,
-            category: n.category,
-            url: n.url,
-            designer: n.designer,
-            pm: n.pm,
-            eng: n.eng,
-            description: n.description,
-            updated: n.updated
-          })),
-          links: links.map(l => ({
-            source: typeof l.source === 'object' ? l.source.id : l.source,
-            target: typeof l.target === 'object' ? l.target.id : l.target,
-            description: l.description || ""
-          }))
-        };
+        // Update categories
+        graphData.categories = categories;
+        graphData.nodes = nodes.map(n => ({
+          id: n.id,
+          label: n.label,
+          category: n.category,
+          url: n.url,
+          designer: n.designer,
+          pm: n.pm,
+          eng: n.eng,
+          description: n.description,
+          updated: n.updated
+        }));
+        graphData.links = links.map(l => ({
+          source: l.source,
+          target: l.target,
+          description: l.description || ""
+        }));
 
+        // Download updated graph-data.json
         const blob = new Blob([JSON.stringify(graphData, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -239,21 +231,14 @@
         a.download = "graph-data.json";
         a.click();
         URL.revokeObjectURL(url);
+
+        restartSimulation();
       }
     }
 
     function updateNodeColors() {
       node.attr("fill", function(d) { return categories[d.category] || "#ccc"; });
     }
-
-    populateCategorySelect();
-
-    nodes.forEach(function(n) {
-      var saved = localStorage.getItem(n.id);
-      if (saved) Object.assign(n, JSON.parse(saved));
-    });
-
-    var simulation, link, node, label;
 
     function restartSimulation() {
       svg.selectAll(".link").remove();
@@ -272,7 +257,12 @@
         .data(links)
         .join("line")
         .attr("class", "link")
-        .on("click", function(event, d) { openSidebar("Link: " + d.source.id + " → " + d.target.id, d); });
+        .on("click", function(event, d) {
+          // Find source/target node objects for sidebar display
+          const src = nodes.find(n => n.id === d.source) || d.source;
+          const tgt = nodes.find(n => n.id === d.target) || d.target;
+          openSidebar("Link: " + (src.label || src.id) + " → " + (tgt.label || tgt.id), d);
+        });
 
       node = zoomContainer.append("g")
         .attr("stroke", "#fff")
@@ -297,10 +287,19 @@
         .text(function(d) { return d.label || d.id; });
 
       simulation.on("tick", function() {
-        link.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+        link.attr("x1", function(d) {
+              // d3 forceLink may mutate to use node objects, handle both id and object
+              return (typeof d.source === 'object' ? d.source.x : nodes.find(n=>n.id===d.source).x);
+            })
+            .attr("y1", function(d) {
+              return (typeof d.source === 'object' ? d.source.y : nodes.find(n=>n.id===d.source).y);
+            })
+            .attr("x2", function(d) {
+              return (typeof d.target === 'object' ? d.target.x : nodes.find(n=>n.id===d.target).x);
+            })
+            .attr("y2", function(d) {
+              return (typeof d.target === 'object' ? d.target.y : nodes.find(n=>n.id===d.target).y);
+            });
 
         node.attr("cx", function(d) { return d.x; })
             .attr("cy", function(d) { return d.y; });
@@ -309,8 +308,6 @@
              .attr("y", function(d) { return d.y + 30; });
       });
     }
-
-    restartSimulation();
 
     function dragstarted(event, d) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -333,7 +330,7 @@
       selectedElement = {
         id: "Node " + (nodes.length + 1),
         label: "Node " + (nodes.length + 1),
-        category: Object.keys(categories)[0],
+        category: Object.keys(categories)[0] || "",
         url: "",
         designer: "",
         pm: "",
@@ -352,6 +349,24 @@
         sidebar.classList.remove("open");
         sidebar.style.display = "none";
       }
+    });
+
+    // Load data from graph-data.json on page load
+    d3.json('graph-data.json').then(function(data) {
+      graphData = data;
+      categories = data.categories || {};
+      nodes = (data.nodes || []).map(n => Object.assign({}, n));
+      links = (data.links || []).map(l => Object.assign({}, l));
+      populateCategorySelect();
+      restartSimulation();
+    }).catch(function() {
+      // If no file found, start with empty data
+      categories = {};
+      nodes = [];
+      links = [];
+      graphData = { categories: {}, nodes: [], links: [] };
+      populateCategorySelect();
+      restartSimulation();
     });
   </script>
 </body>
