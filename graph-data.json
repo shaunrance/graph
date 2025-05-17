@@ -3,52 +3,281 @@
     {
       "id": "Ingest Service",
       "label": "Ingest Service",
-      "category": "Ingest",
+      "category": "Category 3",
       "url": "",
       "designer": "",
       "pm": "a",
       "eng": "",
       "description": "",
-      "updated": "5/16/2025, 12:20:27 PM"
+      "updated": "5/16/2025, 6:21:12 PM"
     },
     {
       "id": "Transcoder",
       "label": "Transcoder",
-      "category": "Processing",
+      "category": "Category 1",
       "url": "asdf",
       "designer": "",
       "pm": "",
       "eng": "",
       "description": "",
-      "updated": "5/16/2025, 10:45:21 AM"
+      "updated": "5/16/2025, 6:21:04 PM"
     },
     {
       "id": "Asset Storage",
       "label": "Asset Storage",
-      "category": "Distribution",
+      "category": "Category 2",
       "url": "",
       "designer": "",
       "pm": "",
       "eng": "",
       "description": "",
-      "updated": "5/16/2025, 5:33:08 PM"
+      "updated": "5/16/2025, 6:20:52 PM"
     }
   ],
   "links": [
     {
+      "source": {
+        "id": "Ingest Service",
+        "label": "Ingest Service",
+        "category": "Category 3",
+        "url": "",
+        "designer": "",
+        "pm": "a",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:12 PM",
+        "index": 0,
+        "x": 416.5550112551809,
+        "y": 442.90364734337317,
+        "vy": -0.0006768711831518772,
+        "vx": -0.0009478737141599534,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
+      "source": {
+        "id": "Asset Storage",
+        "label": "Asset Storage",
+        "category": "Category 2",
+        "url": "",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:20:52 PM",
+        "index": 2,
+        "x": 423.45192265223767,
+        "y": 158.19914164630768,
+        "vy": -0.0006968187066491607,
+        "vx": -0.0003837909598203644,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
+      "source": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Asset Storage",
+        "label": "Asset Storage",
+        "category": "Category 2",
+        "url": "",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:20:52 PM",
+        "index": 2,
+        "x": 423.45192265223767,
+        "y": 158.19914164630768,
+        "vy": -0.0006968187066491607,
+        "vx": -0.0003837909598203644,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
+      "source": {
+        "id": "Asset Storage",
+        "label": "Asset Storage",
+        "category": "Category 2",
+        "url": "",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:20:52 PM",
+        "index": 2,
+        "x": 423.45192265223767,
+        "y": 158.19914164630768,
+        "vy": -0.0006968187066491607,
+        "vx": -0.0003837909598203644,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
+      "source": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Ingest Service",
+        "label": "Ingest Service",
+        "category": "Category 3",
+        "url": "",
+        "designer": "",
+        "pm": "a",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:12 PM",
+        "index": 0,
+        "x": 416.5550112551809,
+        "y": 442.90364734337317,
+        "vy": -0.0006768711831518772,
+        "vx": -0.0009478737141599534,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
+      "source": {
+        "id": "Transcoder",
+        "label": "Transcoder",
+        "category": "Category 1",
+        "url": "asdf",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:21:04 PM",
+        "index": 1,
+        "x": 359.9911717538949,
+        "y": 298.8950309205163,
+        "vy": -0.0008063999131438805,
+        "vx": -0.000562674012600584,
+        "fx": null,
+        "fy": null
+      },
+      "target": {
+        "id": "Asset Storage",
+        "label": "Asset Storage",
+        "category": "Category 2",
+        "url": "",
+        "designer": "",
+        "pm": "",
+        "eng": "",
+        "description": "",
+        "updated": "5/16/2025, 6:20:52 PM",
+        "index": 2,
+        "x": 423.45192265223767,
+        "y": 158.19914164630768,
+        "vy": -0.0006968187066491607,
+        "vx": -0.0003837909598203644,
+        "fx": null,
+        "fy": null
+      },
+      "description": ""
+    },
+    {
       "source": "Ingest Service",
       "target": "Transcoder",
       "description": ""
-    },
-    {
-      "source": "Asset Storage",
-      "target": "Transcoder",
-      "description": ""
-    },
-    {
-      "source": "Transcoder",
-      "target": "Asset Storage",
-      "description": ""
     }
-  ]
+  ],
+  "categories": {
+    "Category 1": "#3a3053",
+    "Category 2": "#8a33a3",
+    "Category 3": "#e3a209"
+  }
 }
