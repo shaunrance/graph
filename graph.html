@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3 Force-Directed Graph Example</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 0; overflow: hidden; }
+    .node circle { cursor: pointer; }
+    .link { stroke: #999; stroke-opacity: 0.6; }
+    .label { font-size: 12px; text-anchor: middle; }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background: #f4f4f4;
+      border-left: 1px solid #ccc;
+      padding: 16px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+    .sidebar.open {
+      right: 0;
+    }
+    .sidebar h2 {
+      margin-top: 0;
+    }
+    .sidebar .form-group {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .sidebar .form-group label {
+      flex: 0 0 90px;
+    }
+    .sidebar input, .sidebar select {
+      flex: 1;
+      height: 32px;
+      box-sizing: border-box;
+    }
+    .sidebar textarea {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+    }
+    .sidebar button {
+      margin-top: 10px;
+    }
+    .last-updated {
+      font-size: 12px;
+      color: #666;
+      margin-top: 16px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <svg width="800" height="600"></svg>
+  <button id="add-node-button" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; padding: 10px 16px; font-size: 14px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Node</button>
+  <div id="sidebar" class="sidebar" style="display: none;">
+    <div>
+      <h2 id="sidebar-title"></h2>
+      <div class="form-group"><label>Product Name</label><input id="name-input" maxlength="30"></div>
+      <div class="form-group"><label>Category</label><select id="category-select"></select></div>
+      <input id="new-category-input" placeholder="Add new category">
+      <button onclick="addCategory()">Add Category</button>
+      <label>Description</label>
+      <textarea id="description-input"></textarea>
+      <div class="form-group"><label>URL</label><input id="url-input" maxlength="50"></div>
+      <div class="form-group"><label>Designer</label><input id="designer-input" maxlength="50"></div>
+      <div class="form-group"><label>PM</label><input id="pm-input" maxlength="50"></div>
+      <div class="form-group"><label>Eng Lead</label><input id="eng-input" maxlength="50"></div>
+      <div class="form-group"><label>Connect To</label>
+        <div id="connect-to-select" style="flex: 1; max-height: 100px; overflow-y: auto; border: 1px solid #ccc; padding: 4px; background: #fff;"></div>
+      </div>
+      <div id="last-updated-text" class="last-updated"></div>
+      <button onclick="saveDescription()">Save</button>
+    </div>
+  </div>
+  <script>
+    var categories = {
+      "Ingest": "#69b3a2",
+      "Processing": "#ffcc00",
+      "Distribution": "#ff6666"
+    };
+
+    var nodes = [
+      { id: "Ingest Service", label: "Ingest Service", category: "Ingest", url: "", designer: "", pm: "", eng: "", description: "", updated: "" },
+      { id: "Transcoder", label: "Transcoder", category: "Processing", url: "", designer: "", pm: "", eng: "", description: "", updated: "" },
+      { id: "Asset Storage", label: "Asset Storage", category: "Distribution", url: "", designer: "", pm: "", eng: "", description: "", updated: "" }
+    ];
+
+    var links = [
+      { source: "Ingest Service", target: "Transcoder", description: "" }
+    ];
+
+    var svg = d3.select("svg");
+
+    var zoom = d3.zoom()
+      .scaleExtent([0.1, 5])
+      .on("zoom", function(event) {
+        svg.select("g.zoom-container")
+          .attr("transform", event.transform);
+      });
+
+    svg.call(zoom);
+
+    var zoomContainer = svg.append("g")
+      .attr("class", "zoom-container");
+    var width = +svg.attr("width");
+    var height = +svg.attr("height");
+
+    var sidebar = document.getElementById("sidebar");
+    var sidebarTitle = document.getElementById("sidebar-title");
+    var nameInput = document.getElementById("name-input");
+    var categorySelect = document.getElementById("category-select");
+    var newCategoryInput = document.getElementById("new-category-input");
+    var urlInput = document.getElementById("url-input");
+    var designerInput = document.getElementById("designer-input");
+    var pmInput = document.getElementById("pm-input");
+    var engInput = document.getElementById("eng-input");
+    var descriptionInput = document.getElementById("description-input");
+    var lastUpdatedText = document.getElementById("last-updated-text");
+    var selectedElement = null;
+
+    function populateCategorySelect() {
+      categorySelect.innerHTML = "";
+      Object.keys(categories).forEach(function(cat) {
+        var option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+      });
+    }
+
+    function addCategory() {
+      var newCat = newCategoryInput.value.trim();
+      if (newCat && !categories[newCat]) {
+        categories[newCat] = '#' + Math.floor(Math.random()*16777215).toString(16);
+        populateCategorySelect();
+        categorySelect.value = newCat;
+        newCategoryInput.value = "";
+      }
+    }
+
+    function openSidebar(title, element) {
+      sidebarTitle.textContent = title;
+      nameInput.value = element.label || element.id;
+      categorySelect.value = element.category || "";
+      urlInput.value = element.url || "";
+      designerInput.value = element.designer || "";
+      pmInput.value = element.pm || "";
+      engInput.value = element.eng || "";
+      descriptionInput.value = element.description || "";
+      lastUpdatedText.textContent = element.updated ? "Last updated: " + element.updated : "";
+
+      var connectToSelect = document.getElementById("connect-to-select");
+      connectToSelect.innerHTML = "";
+      nodes.forEach(function(n) {
+        if (n.id !== element.id) {
+          var checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = n.id;
+          checkbox.checked = links.some(function(l) { return l.source.id === element.id && l.target.id === n.id; });
+          checkbox.style.marginRight = "4px";
+          checkbox.style.width = "auto";
+          checkbox.style.verticalAlign = "middle";
+
+          var label = document.createElement("label");
+          label.style.display = "block";
+          label.style.textAlign = "left";
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(n.label || n.id));
+
+          connectToSelect.appendChild(label);
+        }
+      });
+
+      sidebar.style.display = 'block';
+      setTimeout(function() {
+        sidebar.classList.add("open");
+      }, 10);
+      selectedElement = element;
+    }
+
+    function saveDescription() {
+      if (selectedElement) {
+        selectedElement.label = nameInput.value;
+        selectedElement.category = categorySelect.value;
+        selectedElement.url = urlInput.value;
+        selectedElement.designer = designerInput.value;
+        selectedElement.pm = pmInput.value;
+        selectedElement.eng = engInput.value;
+        selectedElement.description = descriptionInput.value;
+        selectedElement.updated = new Date().toLocaleString();
+        lastUpdatedText.textContent = "Last updated: " + selectedElement.updated;
+        localStorage.setItem(selectedElement.id, JSON.stringify(selectedElement));
+        if (!nodes.some(function(n) { return n.id === selectedElement.id; })) {
+          selectedElement.x = width / 2 + Math.random() * 100 - 50;
+          selectedElement.y = height / 2 + Math.random() * 100 - 50;
+          nodes.push(selectedElement);
+        }
+        var connectToSelect = document.getElementById("connect-to-select");
+        var selectedConnections = Array.from(connectToSelect.querySelectorAll('input[type=checkbox]:checked')).map(function(cb) { return cb.value; });
+        links = links.filter(function(l) { return l.source.id !== selectedElement.id && l.target.id !== selectedElement.id; });
+        selectedConnections.forEach(function(targetId) {
+          links.push({ source: selectedElement.id, target: targetId, description: "" });
+          links.push({ source: targetId, target: selectedElement.id, description: "" });
+        });
+        restartSimulation();
+
+        // Export graph data as JSON file
+        const graphData = {
+          nodes: nodes.map(n => ({
+            id: n.id,
+            label: n.label,
+            category: n.category,
+            url: n.url,
+            designer: n.designer,
+            pm: n.pm,
+            eng: n.eng,
+            description: n.description,
+            updated: n.updated
+          })),
+          links: links.map(l => ({
+            source: typeof l.source === 'object' ? l.source.id : l.source,
+            target: typeof l.target === 'object' ? l.target.id : l.target,
+            description: l.description || ""
+          }))
+        };
+
+        const blob = new Blob([JSON.stringify(graphData, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "graph-data.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function updateNodeColors() {
+      node.attr("fill", function(d) { return categories[d.category] || "#ccc"; });
+    }
+
+    populateCategorySelect();
+
+    nodes.forEach(function(n) {
+      var saved = localStorage.getItem(n.id);
+      if (saved) Object.assign(n, JSON.parse(saved));
+    });
+
+    var simulation, link, node, label;
+
+    function restartSimulation() {
+      svg.selectAll(".link").remove();
+      svg.selectAll(".node").remove();
+      svg.selectAll(".label").remove();
+
+      simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(function(d) { return d.id; }).distance(150))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+      link = zoomContainer.append("g")
+        .attr("stroke", "#999")
+        .attr("stroke-opacity", 0.6)
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("class", "link")
+        .on("click", function(event, d) { openSidebar("Link: " + d.source.id + " → " + d.target.id, d); });
+
+      node = zoomContainer.append("g")
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1.5)
+        .selectAll("circle")
+        .data(nodes)
+        .join("circle")
+        .attr("r", 20)
+        .attr("class", "node")
+        .attr("fill", function(d) { return categories[d.category] || "#ccc"; })
+        .on("click", function(event, d) { openSidebar("Node: " + (d.label || d.id), d); })
+        .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+      label = zoomContainer.append("g")
+        .selectAll("text")
+        .data(nodes)
+        .join("text")
+        .attr("class", "label")
+        .text(function(d) { return d.label || d.id; });
+
+      simulation.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+
+        label.attr("x", function(d) { return d.x; })
+             .attr("y", function(d) { return d.y + 30; });
+      });
+    }
+
+    restartSimulation();
+
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    document.getElementById("add-node-button").addEventListener("click", function() {
+      selectedElement = {
+        id: "Node " + (nodes.length + 1),
+        label: "Node " + (nodes.length + 1),
+        category: Object.keys(categories)[0],
+        url: "",
+        designer: "",
+        pm: "",
+        eng: "",
+        description: "",
+        updated: ""
+      };
+      openSidebar("New Node", selectedElement);
+    });
+
+    document.addEventListener("click", function(event) {
+      var isClickInsideSidebar = sidebar.contains(event.target);
+      var isGraphElement = event.target.closest(".node") || event.target.closest(".link");
+      var isAddNodeButton = event.target.closest("#add-node-button");
+      if (!isClickInsideSidebar && !isGraphElement && !isAddNodeButton) {
+        sidebar.classList.remove("open");
+        sidebar.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
