@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Netflix CBP Product Map</title>
+  <title>D3 Force-Directed Graph Example</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body { font-family: sans-serif; margin: 0; overflow: hidden; }
@@ -177,78 +177,88 @@
       selectedElement = element;
     }
 
+    // --- UPDATED saveDescription FUNCTION ---
     function saveDescription() {
-      if (selectedElement) {
-        selectedElement.label = nameInput.value;
-        selectedElement.category = categorySelect.value;
-        selectedElement.url = urlInput.value;
-        selectedElement.designer = designerInput.value;
-        selectedElement.pm = pmInput.value;
-        selectedElement.eng = engInput.value;
-        selectedElement.description = descriptionInput.value;
-        selectedElement.updated = new Date().toLocaleString();
-        lastUpdatedText.textContent = "Last updated: " + selectedElement.updated;
+      if (!selectedElement) return;
 
-        // If it's a new node, add it to nodes
-        if (!nodes.some(function(n) { return n.id === selectedElement.id; })) {
-          selectedElement.x = width / 2 + Math.random() * 100 - 50;
-          selectedElement.y = height / 2 + Math.random() * 100 - 50;
-          nodes.push(selectedElement);
-        }
+      // Update properties from sidebar
+      selectedElement.label = nameInput.value;
+      selectedElement.category = categorySelect.value;
+      selectedElement.url = urlInput.value;
+      selectedElement.designer = designerInput.value;
+      selectedElement.pm = pmInput.value;
+      selectedElement.eng = engInput.value;
+      selectedElement.description = descriptionInput.value;
+      selectedElement.updated = new Date().toLocaleString();
+      lastUpdatedText.textContent = "Last updated: " + selectedElement.updated;
 
-        // Update links
-        var connectToSelect = document.getElementById("connect-to-select");
-        var selectedConnections = Array.from(connectToSelect.querySelectorAll('input[type=checkbox]:checked')).map(function(cb) { return cb.value; });
-
-        // Remove all links from this node
-        links = links.filter(function(l) { return l.source !== selectedElement.id; });
-        // Add new forward links
-        selectedConnections.forEach(function(targetId) {
-          links.push({ source: selectedElement.id, target: targetId, description: "" });
-        });
-
-        // Update categories
-        graphData.categories = categories;
-        graphData.nodes = nodes.map(n => ({
-          id: n.id,
-          label: n.label,
-          category: n.category,
-          url: n.url,
-          designer: n.designer,
-          pm: n.pm,
-          eng: n.eng,
-          description: n.description,
-          updated: n.updated
-        }));
-        graphData.links = links.map(l => ({
-          source: l.source,
-          target: l.target,
-          description: l.description || ""
-        }));
-
-        // --- Save to server using PHP API ---
-        fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + API_PASSWORD
-          },
-          body: JSON.stringify(graphData)
-        })
-        .then(resp => resp.json())
-        .then(resp => {
-          if (resp.status === 'success') {
-            alert("Graph saved successfully!");
-          } else {
-            alert("Save failed: " + (resp.error || "Unknown error"));
-          }
-        })
-        .catch(err => {
-          alert("Save failed: " + err);
-        });
-
-        restartSimulation();
+      // If it's a new node, add it to nodes (preserve x/y if present)
+      let nodeIdx = nodes.findIndex(n => n.id === selectedElement.id);
+      if (nodeIdx === -1) {
+        selectedElement.x = width / 2 + Math.random() * 100 - 50;
+        selectedElement.y = height / 2 + Math.random() * 100 - 50;
+        nodes.push(selectedElement);
+      } else {
+        // Merge updates into the existing node object (to preserve simulation state)
+        Object.assign(nodes[nodeIdx], selectedElement);
       }
+
+      // Handle links: get current connections from UI
+      var connectToSelect = document.getElementById("connect-to-select");
+      var selectedConnections = Array.from(connectToSelect.querySelectorAll('input[type=checkbox]:checked')).map(cb => cb.value);
+
+      // Remove all links from this node (as source)
+      links = links.filter(l => l.source !== selectedElement.id);
+
+      // Add new links for checked boxes
+      selectedConnections.forEach(targetId => {
+        // Prevent duplicate links
+        if (!links.some(l => l.source === selectedElement.id && l.target === targetId)) {
+          links.push({ source: selectedElement.id, target: targetId, description: "" });
+        }
+      });
+
+      // Rebuild graphData
+      graphData.categories = { ...categories };
+      graphData.nodes = nodes.map(n => ({
+        id: n.id,
+        label: n.label,
+        category: n.category,
+        url: n.url,
+        designer: n.designer,
+        pm: n.pm,
+        eng: n.eng,
+        description: n.description,
+        updated: n.updated
+      }));
+      graphData.links = links.map(l => ({
+        source: typeof l.source === 'object' ? l.source.id : l.source,
+        target: typeof l.target === 'object' ? l.target.id : l.target,
+        description: l.description || ""
+      }));
+
+      // Save to server using PHP API
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + API_PASSWORD
+        },
+        body: JSON.stringify(graphData)
+      })
+      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.status === 'success') {
+          alert("Graph saved successfully!");
+        } else {
+          alert("Save failed: " + (resp.error || "Unknown error"));
+        }
+      })
+      .catch(err => {
+        alert("Save failed: " + err);
+      });
+
+      restartSimulation();
     }
 
     function updateNodeColors() {
