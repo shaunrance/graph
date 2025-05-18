@@ -81,6 +81,10 @@
     </div>
   </div>
   <script>
+    // ---- CONFIGURE THIS! ----
+    const API_URL = 'graph-api.php'; // Relative path to your PHP API
+    const API_PASSWORD = 'netflix'; // <--- SET THIS TO YOUR SECRET PASSWORD
+
     let categories = {};
     let nodes = [];
     let links = [];
@@ -151,7 +155,6 @@
           var checkbox = document.createElement("input");
           checkbox.type = "checkbox";
           checkbox.value = n.id;
-          // only check if the link exists and is not a duplicate reverse link
           checkbox.checked = links.some(function(l) { return l.source === element.id && l.target === n.id; });
           checkbox.style.marginRight = "4px";
           checkbox.style.width = "auto";
@@ -223,14 +226,26 @@
           description: l.description || ""
         }));
 
-        // Download updated graph-data.json
-        const blob = new Blob([JSON.stringify(graphData, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "graph-data.json";
-        a.click();
-        URL.revokeObjectURL(url);
+        // --- Save to server using PHP API ---
+        fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + API_PASSWORD
+          },
+          body: JSON.stringify(graphData)
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+          if (resp.status === 'success') {
+            alert("Graph saved successfully!");
+          } else {
+            alert("Save failed: " + (resp.error || "Unknown error"));
+          }
+        })
+        .catch(err => {
+          alert("Save failed: " + err);
+        });
 
         restartSimulation();
       }
@@ -288,7 +303,6 @@
 
       simulation.on("tick", function() {
         link.attr("x1", function(d) {
-              // d3 forceLink may mutate to use node objects, handle both id and object
               return (typeof d.source === 'object' ? d.source.x : nodes.find(n=>n.id===d.source).x);
             })
             .attr("y1", function(d) {
@@ -351,15 +365,15 @@
       }
     });
 
-    // Load data from graph-data.json on page load
-    d3.json('graph-data.json').then(function(data) {
+    // --- Load data from PHP API on page load ---
+    d3.json(API_URL).then(function(data) {
       graphData = data;
       categories = data.categories || {};
       nodes = (data.nodes || []).map(n => Object.assign({}, n));
       links = (data.links || []).map(l => Object.assign({}, l));
       populateCategorySelect();
       restartSimulation();
-    }).catch(function() {
+    }).catch(function(e) {
       // If no file found, start with empty data
       categories = {};
       nodes = [];
@@ -367,6 +381,7 @@
       graphData = { categories: {}, nodes: [], links: [] };
       populateCategorySelect();
       restartSimulation();
+      alert("Could not load graph data: " + e);
     });
   </script>
 </body>
