@@ -1,0 +1,12 @@
+# Allow the Authorization header to be passed to PHP scripts
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# Usual security: Deny directory listing
+Options -Indexes
+
+# (Optional) Add CORS headers if needed for AJAX requests (adjust as needed)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
