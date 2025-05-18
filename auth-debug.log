@@ -1,0 +1,124 @@
+Array
+(
+    [Content-Length] => 0
+    [Accept-Language] => en-US,en;q=0.9
+    [Accept-Encoding] => gzip, deflate
+    [Referer] => http://dev.shaunrance.com/netflix/graph/
+    [Accept] => */*
+    [User-Agent] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+    [Cache-Control] => no-cache
+    [Pragma] => no-cache
+    [Connection] => close
+    [Host] => dev.shaunrance.com
+)
+
+Array
+(
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [CONTENT_LENGTH] => 0
+    [SCRIPT_NAME] => /netflix/graph/graph-api.php
+    [REQUEST_URI] => /netflix/graph/graph-api.php
+    [QUERY_STRING] => 
+    [REQUEST_METHOD] => GET
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [REMOTE_PORT] => 52268
+    [SCRIPT_FILENAME] => /home/shaunrance/dev.shaunrance.com/netflix/graph/graph-api.php
+    [SERVER_ADMIN] => webmaster@dev.shaunrance.com
+    [CONTEXT_DOCUMENT_ROOT] => /home/shaunrance/dev.shaunrance.com
+    [CONTEXT_PREFIX] => 
+    [REQUEST_SCHEME] => http
+    [DOCUMENT_ROOT] => /home/shaunrance/dev.shaunrance.com
+    [REMOTE_ADDR] => 104.35.0.163
+    [SERVER_PORT] => 80
+    [SERVER_ADDR] => 208.113.188.123
+    [SERVER_NAME] => dev.shaunrance.com
+    [SERVER_SOFTWARE] => Apache
+    [SERVER_SIGNATURE] => 
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_REFERER] => http://dev.shaunrance.com/netflix/graph/
+    [HTTP_ACCEPT] => */*
+    [HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+    [HTTP_CACHE_CONTROL] => no-cache
+    [HTTP_PRAGMA] => no-cache
+    [HTTP_CONNECTION] => close
+    [HTTP_HOST] => dev.shaunrance.com
+    [account_id] => 84452
+    [DH_USER] => shaunrance
+    [ds_id_53976260] => 
+    [dsid] => 53976260
+    [SCRIPT_URI] => http://dev.shaunrance.com/netflix/graph/graph-api.php
+    [SCRIPT_URL] => /netflix/graph/graph-api.php
+    [QS_ConnectionId] => 174760001312284599867435
+    [QS_AllConn] => 2
+    [QS_SrvConn] => 2
+    [UNIQUE_ID] => aCpCjS5RnyimZSVltw49hgAATkc
+    [FCGI_ROLE] => RESPONDER
+    [PHP_SELF] => /netflix/graph/graph-api.php
+    [REQUEST_TIME_FLOAT] => 1747600013.348
+    [REQUEST_TIME] => 1747600013
+)
+
+Array
+(
+    [Accept-Language] => en-US,en;q=0.9
+    [Accept-Encoding] => gzip, deflate
+    [Referer] => http://dev.shaunrance.com/netflix/graph/
+    [Origin] => http://dev.shaunrance.com
+    [Accept] => */*
+    [Content-Type] => application/json
+    [User-Agent] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+    [Content-Length] => 2472
+    [Connection] => close
+    [Host] => dev.shaunrance.com
+)
+
+Array
+(
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SCRIPT_NAME] => /netflix/graph/graph-api.php
+    [REQUEST_URI] => /netflix/graph/graph-api.php
+    [QUERY_STRING] => 
+    [REQUEST_METHOD] => POST
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [REMOTE_PORT] => 52307
+    [SCRIPT_FILENAME] => /home/shaunrance/dev.shaunrance.com/netflix/graph/graph-api.php
+    [SERVER_ADMIN] => webmaster@dev.shaunrance.com
+    [CONTEXT_DOCUMENT_ROOT] => /home/shaunrance/dev.shaunrance.com
+    [CONTEXT_PREFIX] => 
+    [REQUEST_SCHEME] => http
+    [DOCUMENT_ROOT] => /home/shaunrance/dev.shaunrance.com
+    [REMOTE_ADDR] => 104.35.0.163
+    [SERVER_PORT] => 80
+    [SERVER_ADDR] => 208.113.188.123
+    [SERVER_NAME] => dev.shaunrance.com
+    [SERVER_SOFTWARE] => Apache
+    [SERVER_SIGNATURE] => 
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+    [HTTP_REFERER] => http://dev.shaunrance.com/netflix/graph/
+    [HTTP_ORIGIN] => http://dev.shaunrance.com
+    [HTTP_ACCEPT] => */*
+    [CONTENT_TYPE] => application/json
+    [HTTP_USER_AGENT] => Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+    [CONTENT_LENGTH] => 2472
+    [HTTP_CONNECTION] => close
+    [HTTP_HOST] => dev.shaunrance.com
+    [account_id] => 84452
+    [DH_USER] => shaunrance
+    [ds_id_53976260] => 
+    [dsid] => 53976260
+    [SCRIPT_URI] => http://dev.shaunrance.com/netflix/graph/graph-api.php
+    [SCRIPT_URL] => /netflix/graph/graph-api.php
+    [QS_ConnectionId] => 174760002231356780867435
+    [QS_AllConn] => 2
+    [QS_SrvConn] => 2
+    [UNIQUE_ID] => aCpCli5RnyimZSVltw49pgAATnA
+    [FCGI_ROLE] => RESPONDER
+    [PHP_SELF] => /netflix/graph/graph-api.php
+    [REQUEST_TIME_FLOAT] => 1747600022.3254
+    [REQUEST_TIME] => 1747600022
+)
+
