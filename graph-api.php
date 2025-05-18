@@ -1,26 +1,24 @@
 <?php
+file_put_contents(__DIR__.'/auth-debug.log', print_r(getallheaders(), true) . "\n" . print_r($_SERVER, true) . "\n", FILE_APPEND);
 // --- Basic Config ---
 $json_file = __DIR__ . '/graph-data.json';
-$password = 'netflix'; // Make sure this matches your JS password
+$password = 'netflix'; // must match frontend
 
-// --- Allow CORS for local dev, restrict in production ---
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// --- Handle preflight OPTIONS request ---
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-// --- Password check for POST ---
+// Robust Authorization check
 function is_authorized($password) {
-    $headers = [];
-    // getallheaders() is not always available, so fallback if needed
     if (function_exists('getallheaders')) {
         $headers = getallheaders();
     } else {
+        $headers = [];
         foreach ($_SERVER as $name => $value) {
             if (substr($name, 0, 5) == 'HTTP_') {
                 $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
@@ -28,6 +26,7 @@ function is_authorized($password) {
             }
         }
     }
+
     $auth = '';
     foreach ($headers as $key => $val) {
         if (strtolower($key) === 'authorization') {
@@ -35,19 +34,23 @@ function is_authorized($password) {
             break;
         }
     }
+    if (!$auth && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['HTTP_AUTHORIZATION'];
+    }
+    if (!$auth && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+    }
     if ($auth) {
-        // Remove possible extra whitespace
         $auth = trim($auth);
         return $auth === 'Bearer ' . $password;
     }
-    // Fallback to POST param
     if (isset($_POST['password'])) {
         return $_POST['password'] === $password;
     }
     return false;
 }
 
-// --- Handle GET: Read JSON file ---
+// GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (!file_exists($json_file)) {
         http_response_code(404);
@@ -55,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit();
     }
     $fp = fopen($json_file, 'r');
-    if (flock($fp, LOCK_SH)) { // Shared lock
+    if (flock($fp, LOCK_SH)) {
         $contents = stream_get_contents($fp);
         flock($fp, LOCK_UN);
         fclose($fp);
@@ -70,15 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
-// --- Handle POST: Write JSON file ---
+// POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!is_authorized($password)) {
         http_response_code(401);
         echo json_encode(['error' => 'Unauthorized']);
         exit();
     }
-
-    // Read raw POST body
     $raw = file_get_contents('php://input');
     $data = json_decode($raw, true);
     if ($data === null) {
@@ -86,10 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'Invalid JSON']);
         exit();
     }
-
     $fp = fopen($json_file, 'c+');
-    if (flock($fp, LOCK_EX)) { // Exclusive lock
-        ftruncate($fp, 0); // Clear file
+    if (flock($fp, LOCK_EX)) {
+        ftruncate($fp, 0);
         fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
         fflush($fp);
         flock($fp, LOCK_UN);
@@ -104,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// --- Fallback for unsupported methods ---
 http_response_code(405);
 echo json_encode(['error' => 'Method not allowed']);
 exit();
