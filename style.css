@@ -1,0 +1,84 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+.node circle {
+  cursor: pointer;
+}
+.link {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+.label {
+  font-size: 12px;
+  text-anchor: middle;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: #f4f4f4;
+  border-left: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 1001;
+}
+.sidebar.open {
+  right: 0;
+}
+.sidebar h2 {
+  margin-top: 0;
+}
+.sidebar .form-group {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.sidebar .form-group label {
+  flex: 0 0 90px;
+}
+.sidebar input, .sidebar select {
+  flex: 1;
+  height: 32px;
+  box-sizing: border-box;
+}
+.sidebar textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.sidebar button {
+  margin-top: 10px;
+}
+.last-updated {
+  font-size: 12px;
+  color: #666;
+  margin-top: 16px;
+  text-align: right;
+}
+.add-node-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.connect-to-select {
+  flex: 1; 
+  max-height: 100px; 
+  overflow-y: auto; 
+  border: 1px solid #ccc; 
+  padding: 4px; 
+  background: #fff;
+}
