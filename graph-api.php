@@ -1,7 +1,7 @@
 <?php
 // --- Basic Config ---
 $json_file = __DIR__ . '/graph-data.json';
-$password = 'netflix'; // Change this to something secret
+$password = 'netflix'; // Make sure this matches your JS password
 
 // --- Allow CORS for local dev, restrict in production ---
 header('Access-Control-Allow-Origin: *');
@@ -16,11 +16,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // --- Password check for POST ---
 function is_authorized($password) {
-    $headers = getallheaders();
-    if (isset($headers['Authorization'])) {
-        return trim($headers['Authorization']) === 'Bearer ' . $password;
+    $headers = [];
+    // getallheaders() is not always available, so fallback if needed
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$key] = $value;
+            }
+        }
     }
-    // Also check POST param as fallback
+    $auth = '';
+    foreach ($headers as $key => $val) {
+        if (strtolower($key) === 'authorization') {
+            $auth = $val;
+            break;
+        }
+    }
+    if ($auth) {
+        // Remove possible extra whitespace
+        $auth = trim($auth);
+        return $auth === 'Bearer ' . $password;
+    }
+    // Fallback to POST param
     if (isset($_POST['password'])) {
         return $_POST['password'] === $password;
     }
