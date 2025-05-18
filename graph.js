@@ -13,6 +13,21 @@ const zoomContainer = svg.append("g").attr("class", "zoom-container");
 
 const addNodeButton = document.getElementById("add-node-button");
 
+// --- ADD ARROW MARKER DEFINITION ---
+svg.append("defs").append("marker")
+  .attr("id", "arrowhead")
+  .attr("viewBox", "-0 -5 10 10")
+  .attr("refX", 41) // Adjust to position arrow tip at edge of node
+  .attr("refY", 0)
+  .attr("orient", "auto")
+  .attr("markerWidth", 7)
+  .attr("markerHeight", 7)
+  .attr("xoverflow", "visible")
+  .append("svg:path")
+  .attr("d", "M 0,-5 L 10,0 L 0,5")
+  .attr("fill", "#999")
+  .style("stroke", "none");
+
 // Zoom behavior
 const zoom = d3.zoom()
   .scaleExtent([0.1, 5])
@@ -38,6 +53,8 @@ function restartSimulation() {
     .data(links)
     .join("line")
     .attr("class", "link")
+    // --- ADD ARROWHEAD TO END OF LINK ---
+    .attr("marker-end", "url(#arrowhead)")
     .on("click", function(event, d) {
       // Find source/target node objects for sidebar display
       const src = nodes.find(n => n.id === (typeof d.source === "object" ? d.source.id : d.source)) || d.source;
