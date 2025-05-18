@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D3 Force-Directed Graph Example</title>
+  <title>Netflix CBP Product Map</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -26,7 +26,10 @@
         <div id="connect-to-select" class="connect-to-select"></div>
       </div>
       <div id="last-updated-text" class="last-updated"></div>
-      <button id="save-description-button">Save</button>
+      <div style="display: flex; gap: 8px;">
+        <button id="save-description-button">Save</button>
+        <button id="delete-node-button" style="background-color: #dc3545; color: white;">Delete</button>
+      </div>
     </div>
   </div>
   <script src="api.js"></script>
