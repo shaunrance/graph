@@ -1,125 +1,120 @@
-// sidebar.js: Handles sidebar UI and interactions
+// sidebar.js: Handles sidebar UI logic, including open/close and click-outside-to-close
 
-// Define window.selectedElement for global scope
-window.selectedElement = null;
-
-// Sidebar element selectors
 const sidebar = document.getElementById("sidebar");
-const sidebarTitle = document.getElementById("sidebar-title");
+// Use window.addNodeButton as set in graph.js
+
 const nameInput = document.getElementById("name-input");
 const categorySelect = document.getElementById("category-select");
 const newCategoryInput = document.getElementById("new-category-input");
 const addCategoryButton = document.getElementById("add-category-button");
+const descriptionInput = document.getElementById("description-input");
 const urlInput = document.getElementById("url-input");
 const designerInput = document.getElementById("designer-input");
 const pmInput = document.getElementById("pm-input");
 const engInput = document.getElementById("eng-input");
-const descriptionInput = document.getElementById("description-input");
-const lastUpdatedText = document.getElementById("last-updated-text");
 const connectToSelect = document.getElementById("connect-to-select");
+const lastUpdatedText = document.getElementById("last-updated-text");
 const saveDescriptionButton = document.getElementById("save-description-button");
 const deleteNodeButton = document.getElementById("delete-node-button");
 
-// Populate the category <select>
-function populateCategorySelect(categories) {
-  categorySelect.innerHTML = "";
-  Object.keys(categories).forEach(function(cat) {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    categorySelect.appendChild(option);
-  });
-}
-
-// Open the sidebar for editing/adding a node
+// Helper: Open the sidebar with relevant data
 function openSidebar(title, element, nodes, links, categories) {
-  sidebarTitle.textContent = title;
-  nameInput.value = element.label || element.id || "";
+  document.getElementById("sidebar-title").textContent = title;
+  sidebar.style.display = "block";
+  setTimeout(() => sidebar.classList.add("open"), 10);
+
+  // Fill inputs if editing a node
+  window.selectedElement = element;
+  nameInput.value = element.label || "";
   categorySelect.value = element.category || "";
+  descriptionInput.value = element.description || "";
   urlInput.value = element.url || "";
   designerInput.value = element.designer || "";
   pmInput.value = element.pm || "";
   engInput.value = element.eng || "";
-  descriptionInput.value = element.description || "";
-  lastUpdatedText.textContent = element.updated ? "Last updated: " + element.updated : "";
+  lastUpdatedText.textContent = element.updated ? `Last updated: ${element.updated}` : "";
 
-  // Populate connectToSelect
+  // Populate categories select
+  populateCategorySelect(categories);
+
+  // Connect To: Show all other nodes as checkboxes
   connectToSelect.innerHTML = "";
-  nodes.forEach(function(n) {
-    if (n.id !== element.id) {
+  if (nodes && element && element.id) {
+    nodes.filter(n => n.id !== element.id).forEach(n => {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.value = n.id;
-      checkbox.checked = links.some(l => {
+      // Check if there's a link from this node to n
+      const hasLink = links && links.some(l => {
         const src = typeof l.source === "object" ? l.source.id : l.source;
         const tgt = typeof l.target === "object" ? l.target.id : l.target;
         return src === element.id && tgt === n.id;
       });
-      checkbox.style.marginRight = "4px";
-      checkbox.style.width = "auto";
-      checkbox.style.verticalAlign = "middle";
+      checkbox.checked = hasLink;
+      const label = document.createElement("label");
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(" " + (n.label || n.id)));
+      connectToSelect.appendChild(label);
+      connectToSelect.appendChild(document.createElement("br"));
+    });
+  }
 
-      const labelEl = document.createElement("label");
-      labelEl.style.display = "block";
-      labelEl.style.textAlign = "left";
-      labelEl.appendChild(checkbox);
-      labelEl.appendChild(document.createTextNode(n.label || n.id));
-
-      connectToSelect.appendChild(labelEl);
-    }
-  });
-
-  sidebar.style.display = "block";
-  setTimeout(() => sidebar.classList.add("open"), 10);
-  window.selectedElement = element;
+  // Attach the click-outside-to-close logic
+  document.addEventListener("mousedown", handleClickOutsideSidebar);
 }
 
-// Close the sidebar
 function closeSidebar() {
   sidebar.classList.remove("open");
   setTimeout(() => {
     sidebar.style.display = "none";
+    window.selectedElement = null;
+    document.removeEventListener("mousedown", handleClickOutsideSidebar);
   }, 300);
 }
+
+// The actual click-outside handler
+function handleClickOutsideSidebar(event) {
+  // Use window.addNodeButton to avoid redeclaration
+  if (!sidebar.classList.contains("open")) return;
+  if (!sidebar.contains(event.target) && !(window.addNodeButton && window.addNodeButton.contains(event.target))) {
+    closeSidebar();
+  }
+}
+
+// Populate category dropdown
+function populateCategorySelect(categories) {
+  categorySelect.innerHTML = "";
+  Object.entries(categories || {}).forEach(([k, v]) => {
+    const option = document.createElement("option");
+    option.value = k;
+    option.textContent = k;
+    categorySelect.appendChild(option);
+  });
+}
+window.populateCategorySelect = populateCategorySelect;
 
 // Add new category
 addCategoryButton.addEventListener("click", function() {
   const newCat = newCategoryInput.value.trim();
-  if (newCat && !window.categories[newCat]) {
-    window.categories[newCat] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  if (newCat && !(newCat in window.categories)) {
+    window.categories[newCat] = "#ccc";
     populateCategorySelect(window.categories);
     categorySelect.value = newCat;
     newCategoryInput.value = "";
   }
 });
 
-// Save description (delegated to graph.js)
+// Save
 saveDescriptionButton.addEventListener("click", function() {
-  if (window.saveDescription) {
-    window.saveDescription();
-  }
+  window.saveDescription();
+  closeSidebar();
 });
 
-// Delete node (delegated to graph.js)
-if (deleteNodeButton) {
-  deleteNodeButton.addEventListener("click", function() {
-    if (window.deleteSelectedNode) {
-      window.deleteSelectedNode();
-    }
-  });
-}
-
-// Close sidebar when clicking outside
-document.addEventListener("click", function(event) {
-  const isClickInsideSidebar = sidebar.contains(event.target);
-  const isGraphElement = event.target.closest(".node") || event.target.closest(".link");
-  const isAddNodeButton = event.target.closest("#add-node-button");
-  if (!isClickInsideSidebar && !isGraphElement && !isAddNodeButton) {
-    closeSidebar();
-  }
+// Delete
+deleteNodeButton.addEventListener("click", function() {
+  window.deleteSelectedNode();
 });
 
-// Export functions for use in graph.js
-window.populateCategorySelect = populateCategorySelect;
+// Expose sidebar functions for use elsewhere
 window.openSidebar = openSidebar;
 window.closeSidebar = closeSidebar;

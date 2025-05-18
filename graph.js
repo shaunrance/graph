@@ -6,6 +6,8 @@ let links = [];
 let graphData = {};
 let simulation, link, node, label;
 
+window.addNodeButton = document.getElementById("add-node-button"); // Make globally accessible
+
 const svg = d3.select("#network-svg");
 
 // Utility function to get the current SVG size (responsive)
@@ -18,7 +20,6 @@ function getSvgSize() {
 }
 
 let zoomContainer = svg.append("g").attr("class", "zoom-container");
-const addNodeButton = document.getElementById("add-node-button");
 
 // --- ARROW MARKER DEFINITION ---
 svg.append("defs").append("marker")
@@ -313,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function() {
     alert("Could not load graph data: " + e);
   });
 
-  addNodeButton.addEventListener("click", function(event) {
+  window.addNodeButton.addEventListener("click", function(event) {
     event.stopPropagation();
     const { width, height } = getSvgSize();
     const newNode = {
@@ -343,9 +344,4 @@ window.addEventListener('resize', () => {
     ).strength(0.03));
     simulation.alpha(0.4).restart();
   }
-});
-
-// Prevent sidebar from closing when clicking inside the sidebar
-sidebar.addEventListener("mousedown", function(event) {
-  event.stopPropagation();
 });
