@@ -7,7 +7,10 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <svg width="800" height="600"></svg>
+  <!-- SVG fills the viewport according to CSS and JS -->
+  <svg id="network-svg"></svg>
+
+  <!-- UI overlays, floating above SVG -->
   <button id="add-node-button" class="add-node-btn">Add Node</button>
   <div id="sidebar" class="sidebar" style="display: none;">
     <div>
@@ -26,11 +29,25 @@
         <div id="connect-to-select" class="connect-to-select"></div>
       </div>
       <div id="last-updated-text" class="last-updated"></div>
-      <button id="save-description-button">Save</button>
+      <div style="display: flex; gap: 8px;">
+        <button id="save-description-button">Save</button>
+        <button id="delete-node-button" style="background-color: #dc3545; color: white;">Delete</button>
+      </div>
     </div>
   </div>
   <script src="api.js"></script>
   <script src="sidebar.js"></script>
   <script src="graph.js"></script>
+  <script>
+    // Make SVG always fill the viewport, and update on resize.
+    function resizeSVG() {
+      const svg = document.getElementById('network-svg');
+      svg.setAttribute('width', window.innerWidth);
+      svg.setAttribute('height', window.innerHeight);
+    }
+    window.addEventListener('resize', resizeSVG);
+    resizeSVG();
+    // Hand tuning tip: You can clamp min/max dimensions if you want to avoid extreme shapes.
+  </script>
 </body>
 </html>

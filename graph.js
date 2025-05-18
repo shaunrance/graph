@@ -6,22 +6,29 @@ let links = [];
 let graphData = {};
 let simulation, link, node, label;
 
-const svg = d3.select("svg");
-const width = +svg.attr("width");
-const height = +svg.attr("height");
-const zoomContainer = svg.append("g").attr("class", "zoom-container");
+const svg = d3.select("#network-svg");
 
+// Utility function to get the current SVG size (responsive)
+function getSvgSize() {
+  const el = svg.node();
+  return {
+    width: el.clientWidth || +svg.attr("width"),
+    height: el.clientHeight || +svg.attr("height")
+  };
+}
+
+let zoomContainer = svg.append("g").attr("class", "zoom-container");
 const addNodeButton = document.getElementById("add-node-button");
 
-// --- ADD ARROW MARKER DEFINITION ---
+// --- ARROW MARKER DEFINITION ---
 svg.append("defs").append("marker")
   .attr("id", "arrowhead")
   .attr("viewBox", "-0 -5 10 10")
-  .attr("refX", 41) // Adjust to position arrow tip at edge of node
+  .attr("refX", 28)
   .attr("refY", 0)
   .attr("orient", "auto")
-  .attr("markerWidth", 7)
-  .attr("markerHeight", 7)
+  .attr("markerWidth", 8)
+  .attr("markerHeight", 8)
   .attr("xoverflow", "visible")
   .append("svg:path")
   .attr("d", "M 0,-5 L 10,0 L 0,5")
@@ -36,15 +43,34 @@ const zoom = d3.zoom()
   });
 svg.call(zoom);
 
+/**
+ * Hand tuning tip:
+ * - To make the graph denser, decrease link distance and reduce (make less negative) charge strength.
+ * - Add or adjust collide/radial forces for fine control of node clustering.
+ * - You may want to expose these values via UI sliders for real-time experimentation.
+ */
 function restartSimulation() {
-  svg.selectAll(".link").remove();
-  svg.selectAll(".node").remove();
-  svg.selectAll(".label").remove();
+  // Remove old elements before re-rendering
+  zoomContainer.selectAll(".link").remove();
+  zoomContainer.selectAll(".node").remove();
+  zoomContainer.selectAll(".label").remove();
+
+  // Get current SVG width and height for simulation
+  const { width, height } = getSvgSize();
 
   simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(function(d) { return d.id; }).distance(150))
-    .force("charge", d3.forceManyBody().strength(-300))
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("link", d3.forceLink(links)
+      .id(d => d.id)
+      .distance(80) // Hand tuning: decrease for higher density (default was 150)
+    )
+    .force("charge", d3.forceManyBody()
+      .strength(-100) // Hand tuning: less negative for more density (default was -300)
+    )
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("collide", d3.forceCollide(22)) // Hand tuning: adjust radius to let nodes get closer or avoid overlap
+    .force("radial", d3.forceRadial(
+      Math.min(width, height) / 2.5, width / 2, height / 2
+    ).strength(0.03)); // Hand tuning: add radial force for more "pull" towards center
 
   link = zoomContainer.append("g")
     .attr("stroke", "#999")
@@ -53,7 +79,6 @@ function restartSimulation() {
     .data(links)
     .join("line")
     .attr("class", "link")
-    // --- ADD ARROWHEAD TO END OF LINK ---
     .attr("marker-end", "url(#arrowhead)")
     .on("click", function(event, d) {
       // Find source/target node objects for sidebar display
@@ -73,6 +98,7 @@ function restartSimulation() {
     .attr("fill", function(d) { return categories[d.category] || "#ccc"; })
     .on("click", function(event, d) { 
       window.openSidebar("Node: " + (d.label || d.id), d, nodes, links, categories); 
+      event.stopPropagation();
     })
     .call(d3.drag()
       .on("start", dragstarted)
@@ -143,6 +169,8 @@ window.saveDescription = function saveDescription() {
   // If it's a new node, add it to nodes (preserve x/y if present)
   let nodeIdx = nodes.findIndex(n => n.id === window.selectedElement.id);
   if (nodeIdx === -1) {
+    // Place new node near center with slight random offset
+    const { width, height } = getSvgSize();
     window.selectedElement.x = width / 2 + Math.random() * 100 - 50;
     window.selectedElement.y = height / 2 + Math.random() * 100 - 50;
     nodes.push(window.selectedElement);
@@ -259,7 +287,6 @@ window.deleteSelectedNode = function deleteSelectedNode() {
       alert("Delete failed: " + err);
     });
 
-  // Refresh
   restartSimulation();
   window.closeSidebar();
 };
@@ -268,7 +295,6 @@ window.categories = categories; // For sidebar.js to access
 window.nodes = nodes;
 window.links = links;
 
-// Load data on page load
 document.addEventListener("DOMContentLoaded", function() {
   loadGraphData().then(function(data) {
     graphData = data;
@@ -287,8 +313,9 @@ document.addEventListener("DOMContentLoaded", function() {
     alert("Could not load graph data: " + e);
   });
 
-  // Attach Add Node listener only after DOM is ready
-  addNodeButton.addEventListener("click", function() {
+  addNodeButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    const { width, height } = getSvgSize();
     const newNode = {
       id: "Node " + (nodes.length + 1),
       label: "Node " + (nodes.length + 1),
@@ -298,8 +325,27 @@ document.addEventListener("DOMContentLoaded", function() {
       pm: "",
       eng: "",
       description: "",
-      updated: ""
+      updated: "",
+      x: width / 2 + Math.random() * 100 - 50,
+      y: height / 2 + Math.random() * 100 - 50
     };
     window.openSidebar("New Node", newNode, nodes, links, categories);
   });
+});
+
+// On window resize, update simulation center and radial forces
+window.addEventListener('resize', () => {
+  const { width, height } = getSvgSize();
+  if (simulation) {
+    simulation.force("center", d3.forceCenter(width / 2, height / 2));
+    simulation.force("radial", d3.forceRadial(
+      Math.min(width, height) / 2.5, width / 2, height / 2
+    ).strength(0.03));
+    simulation.alpha(0.4).restart();
+  }
+});
+
+// Prevent sidebar from closing when clicking inside the sidebar
+sidebar.addEventListener("mousedown", function(event) {
+  event.stopPropagation();
 });

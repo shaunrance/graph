@@ -1,32 +1,54 @@
 body {
-  font-family: sans-serif;
   margin: 0;
-  overflow: hidden;
+  font-family: sans-serif;
+  background: #f9f9f9;
+  overflow: hidden; /* Prevent scrollbars as SVG fills viewport */
 }
-.node circle {
+
+svg#network-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: #fff;
+  display: block;
+  /* Hand tuning: You can add a border for debugging layout, e.g., border: 2px dashed #f90; */
+}
+
+.add-node-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   cursor: pointer;
 }
-.link {
-  stroke: #999;
-  stroke-opacity: 0.6;
+.add-node-btn:hover {
+  background: #0056b3;
 }
-.label {
-  font-size: 12px;
-  text-anchor: middle;
-}
+
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px;
+  right: -320px;
   width: 300px;
   height: 100%;
   background: #f4f4f4;
   border-left: 1px solid #ccc;
   padding: 16px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.08);
   overflow-y: auto;
-  z-index: 1001;
+  z-index: 101;
+  transition: right 0.3s cubic-bezier(.4,0,.2,1);
+  /* Hand tuning: Adjust width for more/less space, or use media queries for responsiveness */
 }
 .sidebar.open {
   right: 0;
@@ -49,30 +71,20 @@ body {
 }
 .sidebar textarea {
   width: 100%;
+  min-height: 48px;
   box-sizing: border-box;
   margin-top: 10px;
+  resize: vertical;
 }
 .sidebar button {
   margin-top: 10px;
+  cursor: pointer;
 }
 .last-updated {
   font-size: 12px;
   color: #666;
   margin-top: 16px;
   text-align: right;
-}
-.add-node-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-  padding: 10px 16px;
-  font-size: 14px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 .connect-to-select {
   flex: 1; 
@@ -81,4 +93,17 @@ body {
   border: 1px solid #ccc; 
   padding: 4px; 
   background: #fff;
+}
+#delete-node-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+#delete-node-button:hover {
+  background-color: #a71d2a;
 }
