@@ -1,54 +1,200 @@
 {
-  "nodes": [
-    {
-      "id": "Ingest Service",
-      "label": "Ingest Service",
-      "category": "Ingest",
-      "url": "",
-      "designer": "",
-      "pm": "a",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 12:20:27 PM"
-    },
-    {
-      "id": "Transcoder",
-      "label": "Transcoder",
-      "category": "Processing",
-      "url": "asdf",
-      "designer": "",
-      "pm": "",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 10:45:21 AM"
-    },
-    {
-      "id": "Asset Storage",
-      "label": "Asset Storage",
-      "category": "Distribution",
-      "url": "",
-      "designer": "",
-      "pm": "",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 5:33:08 PM"
+    "nodes": [
+        {
+            "id": "Ingest Service",
+            "label": "Watson",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "a",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:44:01 PM"
+        },
+        {
+            "id": "Transcoder",
+            "label": "Gravity",
+            "category": "Finance",
+            "url": "asdf",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:38:13 PM"
+        },
+        {
+            "id": "Asset Storage",
+            "label": "Prequel",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:35:29 PM"
+        },
+        {
+            "id": "Node 4",
+            "label": "Orion",
+            "category": "Finance",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:38:33 PM"
+        },
+        {
+            "id": "Node 5",
+            "label": "Moneyball",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:45:45 PM"
+        },
+        {
+            "id": "Node 6",
+            "label": "Production Finance Hub",
+            "category": "Production",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:44:07 PM"
+        },
+        {
+            "id": "Node 7",
+            "label": "Rights",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:45:10 PM"
+        },
+        {
+            "id": "Node 8",
+            "label": "Talent Finance",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:43:49 PM"
+        },
+        {
+            "id": "Node 9",
+            "label": "Songbird",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:46:40 PM"
+        },
+        {
+            "id": "Node 10",
+            "label": "Residuals",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:45:36 PM"
+        },
+        {
+            "id": "Node 11",
+            "label": "Amadeus",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 2:46:29 PM"
+        }
+    ],
+    "links": [
+        {
+            "source": "Asset Storage",
+            "target": "Transcoder",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Ingest Service",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Asset Storage",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Node 4",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Node 5",
+            "description": ""
+        },
+        {
+            "source": "Ingest Service",
+            "target": "Node 6",
+            "description": ""
+        },
+        {
+            "source": "Ingest Service",
+            "target": "Node 7",
+            "description": ""
+        },
+        {
+            "source": "Ingest Service",
+            "target": "Node 8",
+            "description": ""
+        },
+        {
+            "source": "Node 6",
+            "target": "Node 8",
+            "description": ""
+        },
+        {
+            "source": "Node 7",
+            "target": "Node 5",
+            "description": ""
+        },
+        {
+            "source": "Node 7",
+            "target": "Node 9",
+            "description": ""
+        },
+        {
+            "source": "Node 5",
+            "target": "Node 10",
+            "description": ""
+        },
+        {
+            "source": "Node 9",
+            "target": "Node 11",
+            "description": ""
+        }
+    ],
+    "categories": {
+        "Dubbing": "#561cda",
+        "Finance": "#65c3a1",
+        "Content Intelligence": "#667f90",
+        "Business and Legal Affairs": "#c23394",
+        "Content Controllership": "#92665d",
+        "Production": "#a438e5"
     }
-  ],
-  "links": [
-    {
-      "source": "Ingest Service",
-      "target": "Transcoder",
-      "description": ""
-    },
-    {
-      "source": "Asset Storage",
-      "target": "Transcoder",
-      "description": ""
-    },
-    {
-      "source": "Transcoder",
-      "target": "Asset Storage",
-      "description": ""
-    }
-  ]
 }
