@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D3 Network with Sidebar</title>
+  <title>Netflix CBP Product Map</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <svg id="network-svg"></svg>
-  <button id="add-node-btn" class="add-node-btn">Add Node</button>
+  <button id="add-node-btn" class="add-node-btn">Add Product</button>
   <div id="sidebar" class="sidebar">
     <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar">&times;</button>
     <h2 id="sidebar-title">Sidebar</h2>
@@ -61,6 +61,10 @@
     <button id="save-description-button">Save</button>
     <button id="delete-node-button">Delete</button>
   </div>
+
+  <!-- Tooltip for node description -->
+  <div id="graph-tooltip" class="graph-tooltip" style="position:absolute; pointer-events:none; display:none;"></div>
+
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="api.js"></script>
   <script src="graph.js"></script>

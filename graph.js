@@ -6,7 +6,7 @@ let links = [];
 let graphData = {};
 let simulation, link, node, label;
 
-window.addNodeButton = document.getElementById("add-node-btn"); // Make globally accessible
+window.addNodeButton = document.getElementById("add-node-btn"); // Corrected ID
 
 const svg = d3.select("#network-svg");
 
@@ -62,16 +62,16 @@ function restartSimulation() {
   simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links)
       .id(d => d.id)
-      .distance(80) // Hand tuning: decrease for higher density (default was 150)
+      .distance(80)
     )
     .force("charge", d3.forceManyBody()
-      .strength(-100) // Hand tuning: less negative for more density (default was -300)
+      .strength(-100)
     )
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collide", d3.forceCollide(22)) // Hand tuning: adjust radius to let nodes get closer or avoid overlap
+    .force("collide", d3.forceCollide(22))
     .force("radial", d3.forceRadial(
       Math.min(width, height) / 2.5, width / 2, height / 2
-    ).strength(0.03)); // Hand tuning: add radial force for more "pull" towards center
+    ).strength(0.03));
 
   link = zoomContainer.append("g")
     .attr("stroke", "#999")
@@ -82,7 +82,6 @@ function restartSimulation() {
     .attr("class", "link")
     .attr("marker-end", "url(#arrowhead)")
     .on("click", function(event, d) {
-      // Find source/target node objects for sidebar display
       const src = nodes.find(n => n.id === (typeof d.source === "object" ? d.source.id : d.source)) || d.source;
       const tgt = nodes.find(n => n.id === (typeof d.target === "object" ? d.target.id : d.target)) || d.target;
       window.openSidebar("Link: " + (src.label || src.id) + " → " + (tgt.label || tgt.id), d, nodes, links, categories);
@@ -98,9 +97,31 @@ function restartSimulation() {
     .attr("class", "node")
     .attr("fill", function(d) { return categories[d.category] || "#ccc"; })
     .on("click", function(event, d) { 
-      window.openSidebar("Node: " + (d.label || d.id), d, nodes, links, categories); 
+      window.openSidebar("Product: " + (d.label || d.id), d, nodes, links, categories); 
       event.stopPropagation();
     })
+    // --- Begin Tooltip Events ---
+    .on("mouseover", function(event, d) {
+      const tooltip = document.getElementById('graph-tooltip');
+      if (d.description && d.description.trim() !== "") {
+        tooltip.textContent = d.description;
+      } else {
+        tooltip.textContent = "(No description)";
+      }
+      tooltip.style.display = "block";
+      tooltip.style.left = (event.pageX + 14) + "px";
+      tooltip.style.top = (event.pageY + 8) + "px";
+    })
+    .on("mousemove", function(event) {
+      const tooltip = document.getElementById('graph-tooltip');
+      tooltip.style.left = (event.pageX + 14) + "px";
+      tooltip.style.top = (event.pageY + 8) + "px";
+    })
+    .on("mouseout", function(event, d) {
+      const tooltip = document.getElementById('graph-tooltip');
+      tooltip.style.display = "none";
+    })
+    // --- End Tooltip Events ---
     .call(d3.drag()
       .on("start", dragstarted)
       .on("drag", dragged)
@@ -330,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
       x: width / 2 + Math.random() * 100 - 50,
       y: height / 2 + Math.random() * 100 - 50
     };
-    window.openSidebar("New Node", newNode, nodes, links, categories);
+    window.openSidebar("New Product", newNode, nodes, links, categories);
   });
 });
 
