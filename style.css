@@ -12,12 +12,12 @@ body {
   background: #f4f4f4;
 }
 
-/* Sidebar styles - reverted to previous look (minimal, left border, light background) */
+/* Sidebar styles */
 .sidebar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 300px;
+  width: 360px;
   height: 100vh;
   background: #f9f9f9;
   border-left: 1px solid #ddd;
@@ -38,17 +38,67 @@ body {
   font-size: 1.25em;
 }
 
+/* FLEX ROWS FOR FIELDS */
+.sidebar-field-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.sidebar-field-row label {
+  min-width: 80px;
+  margin-right: 8px;
+  margin-bottom: 0;
+  font-weight: 500;
+  text-align: right;
+}
+.sidebar-field-row input,
+.sidebar-field-row select {
+  flex: 1;
+  width: 0;
+}
+.sidebar-field-row input[type="text"] {
+  min-width: 0;
+}
+.sidebar-field-row select {
+  min-width: 0;
+}
+.sidebar-field-row input[type="text"],
+.sidebar-field-row select {
+  padding: 4px 6px;
+  font-size: 1em;
+  border: 1px solid #ccd;
+  border-radius: 3px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.sidebar-field-row button {
+  margin-left: 6px;
+  padding: 4px 10px;
+  font-size: 0.95em;
+}
+
+.new-category-row {
+  margin-bottom: 16px;
+  margin-top: -4px; /* pull up tight to category row */
+}
+.invisible-label {
+  min-width: 80px;
+  margin-right: 8px;
+  margin-bottom: 0;
+  visibility: hidden;
+}
+
 .sidebar label {
   display: block;
   margin: 10px 0 4px 0;
   font-weight: 500;
   font-size: 1em;
 }
-.sidebar input[type="text"],
-.sidebar select,
 .sidebar textarea {
   width: 96%;
-  margin-top: 2px;
+  min-height: 54px;
+  resize: vertical;
   margin-bottom: 8px;
   padding: 4px 6px;
   font-size: 1em;
@@ -57,21 +107,31 @@ body {
   background: #fff;
   box-sizing: border-box;
 }
-.sidebar textarea {
-  min-height: 54px;
-  resize: vertical;
+/* Scrollable Connect To area */
+#connect-to-select-wrapper {
+  max-height: 120px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  background: #fafbfc;
+  padding: 6px 4px;
+  margin-bottom: 12px;
+  border-radius: 4px;
 }
 #connect-to-select {
-  margin: 8px 0 12px 0;
   font-size: 0.98em;
 }
-
+/* Unbolded Connect To label */
+.connect-to-label {
+  font-weight: 400;
+  font-size: 1em;
+  margin-bottom: 0;
+  display: inline-block;
+}
 #last-updated-text {
   color: #999;
   font-size: 0.9em;
   margin: 8px 0 12px 0;
 }
-
 #save-description-button,
 #delete-node-button {
   margin: 8px 6px 0 0;
@@ -84,10 +144,9 @@ body {
 }
 #save-description-button { background: #1976d2; color: #fff; }
 #delete-node-button { background: #eee; color: #444; }
-
 .add-node-btn {
   position: fixed;
-  bottom: 24px;   /* place at bottom */
+  bottom: 24px;
   left: 24px;
   z-index: 120;
   background: #1976d2;
@@ -99,7 +158,6 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
-
 /* Sidebar close 'X' button */
 .sidebar-close-btn {
   position: absolute;

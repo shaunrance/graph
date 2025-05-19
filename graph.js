@@ -6,7 +6,7 @@ let links = [];
 let graphData = {};
 let simulation, link, node, label;
 
-window.addNodeButton = document.getElementById("add-node-button"); // Make globally accessible
+window.addNodeButton = document.getElementById("add-node-btn"); // Make globally accessible
 
 const svg = d3.select("#network-svg");
 

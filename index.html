@@ -11,22 +11,51 @@
   <div id="sidebar" class="sidebar">
     <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar">&times;</button>
     <h2 id="sidebar-title">Sidebar</h2>
-    <label>Name: <input id="name-input" type="text"></label><br>
-    <label>Category:
+
+    <!-- Name field label to the left -->
+    <div class="sidebar-field-row">
+      <label for="name-input">Name:</label>
+      <input id="name-input" type="text">
+    </div>
+
+    <!-- Category dropdown label to the left -->
+    <div class="sidebar-field-row">
+      <label for="category-select">Category:</label>
       <select id="category-select"></select>
+    </div>
+    <!-- New Category field below dropdown -->
+    <div class="sidebar-field-row new-category-row">
+      <label for="new-category-input" class="invisible-label"></label>
       <input id="new-category-input" type="text" placeholder="New category">
       <button id="add-category-button">Add</button>
-    </label><br>
+    </div>
+
     <label>Description:<br>
       <textarea id="description-input"></textarea>
     </label><br>
-    <label>URL: <input id="url-input" type="text"></label><br>
-    <label>Designer: <input id="designer-input" type="text"></label><br>
-    <label>PM: <input id="pm-input" type="text"></label><br>
-    <label>Engineer: <input id="eng-input" type="text"></label><br>
+
+    <div class="sidebar-field-row">
+      <label for="url-input">URL:</label>
+      <input id="url-input" type="text">
+    </div>
+    <div class="sidebar-field-row">
+      <label for="designer-input">Designer:</label>
+      <input id="designer-input" type="text">
+    </div>
+    <div class="sidebar-field-row">
+      <label for="pm-input">PM:</label>
+      <input id="pm-input" type="text">
+    </div>
+    <div class="sidebar-field-row" style="margin-bottom:24px">
+      <label for="eng-input">Engineer:</label>
+      <input id="eng-input" type="text">
+    </div>
+
     <div>
-      <strong>Connect To:</strong><br>
-      <div id="connect-to-select"></div>
+      <span class="connect-to-label">Connect To:</span><br>
+      <div id="connect-to-select-wrapper">
+        <div id="connect-to-select"></div>
+      </div>
     </div>
     <div id="last-updated-text"></div>
     <button id="save-description-button">Save</button>
