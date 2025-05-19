@@ -1,109 +1,120 @@
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: #f9f9f9;
-  overflow: hidden; /* Prevent scrollbars as SVG fills viewport */
+  font-family: system-ui, sans-serif;
 }
 
-svg#network-svg {
+#network-svg {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  background: #fff;
-  display: block;
-  /* Hand tuning: You can add a border for debugging layout, e.g., border: 2px dashed #f90; */
+  background: #f4f4f4;
 }
 
-.add-node-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-  padding: 10px 16px;
-  background: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  cursor: pointer;
-}
-.add-node-btn:hover {
-  background: #0056b3;
-}
-
+/* Sidebar styles - reverted to previous look (minimal, left border, light background) */
 .sidebar {
   position: fixed;
   top: 0;
-  right: -320px;
+  right: 0;
   width: 300px;
-  height: 100%;
-  background: #f4f4f4;
-  border-left: 1px solid #ccc;
-  padding: 16px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.08);
-  overflow-y: auto;
-  z-index: 101;
-  transition: right 0.3s cubic-bezier(.4,0,.2,1);
-  /* Hand tuning: Adjust width for more/less space, or use media queries for responsiveness */
+  height: 100vh;
+  background: #f9f9f9;
+  border-left: 1px solid #ddd;
+  padding: 20px 16px 16px 16px;
+  box-sizing: border-box;
+  z-index: 110;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  display: none;
 }
 .sidebar.open {
-  right: 0;
+  display: block;
+  transform: translateX(0);
 }
 .sidebar h2 {
   margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25em;
 }
-.sidebar .form-group {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+
+.sidebar label {
+  display: block;
+  margin: 10px 0 4px 0;
+  font-weight: 500;
+  font-size: 1em;
 }
-.sidebar .form-group label {
-  flex: 0 0 90px;
-}
-.sidebar input, .sidebar select {
-  flex: 1;
-  height: 32px;
+.sidebar input[type="text"],
+.sidebar select,
+.sidebar textarea {
+  width: 96%;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  padding: 4px 6px;
+  font-size: 1em;
+  border: 1px solid #ccd;
+  border-radius: 3px;
+  background: #fff;
   box-sizing: border-box;
 }
 .sidebar textarea {
-  width: 100%;
-  min-height: 48px;
-  box-sizing: border-box;
-  margin-top: 10px;
+  min-height: 54px;
   resize: vertical;
 }
-.sidebar button {
-  margin-top: 10px;
-  cursor: pointer;
+#connect-to-select {
+  margin: 8px 0 12px 0;
+  font-size: 0.98em;
 }
-.last-updated {
-  font-size: 12px;
-  color: #666;
-  margin-top: 16px;
-  text-align: right;
+
+#last-updated-text {
+  color: #999;
+  font-size: 0.9em;
+  margin: 8px 0 12px 0;
 }
-.connect-to-select {
-  flex: 1; 
-  max-height: 100px; 
-  overflow-y: auto; 
-  border: 1px solid #ccc; 
-  padding: 4px; 
-  background: #fff;
-}
+
+#save-description-button,
 #delete-node-button {
-  background-color: #dc3545;
-  color: white;
+  margin: 8px 6px 0 0;
+  padding: 7px 16px;
+  font-size: 1em;
   border: none;
   border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 14px;
-  margin-top: 10px;
-  transition: background 0.2s;
+  cursor: pointer;
+  vertical-align: middle;
 }
-#delete-node-button:hover {
-  background-color: #a71d2a;
+#save-description-button { background: #1976d2; color: #fff; }
+#delete-node-button { background: #eee; color: #444; }
+
+.add-node-btn {
+  position: fixed;
+  bottom: 24px;   /* place at bottom */
+  left: 24px;
+  z-index: 120;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+/* Sidebar close 'X' button */
+.sidebar-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #aaa;
+  cursor: pointer;
+  z-index: 150;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.sidebar-close-btn:hover {
+  color: #1976d2;
 }

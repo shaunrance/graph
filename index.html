@@ -2,52 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Netflix CBP Product Map</title>
+  <title>D3 Network with Sidebar</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <!-- SVG fills the viewport according to CSS and JS -->
   <svg id="network-svg"></svg>
-
-  <!-- UI overlays, floating above SVG -->
-  <button id="add-node-button" class="add-node-btn">Add Node</button>
-  <div id="sidebar" class="sidebar" style="display: none;">
-    <div>
-      <h2 id="sidebar-title"></h2>
-      <div class="form-group"><label>Product Name</label><input id="name-input" maxlength="30"></div>
-      <div class="form-group"><label>Category</label><select id="category-select"></select></div>
-      <input id="new-category-input" placeholder="Add new category">
-      <button id="add-category-button">Add Category</button>
-      <label>Description</label>
+  <button id="add-node-btn" class="add-node-btn">Add Node</button>
+  <div id="sidebar" class="sidebar">
+    <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar">&times;</button>
+    <h2 id="sidebar-title">Sidebar</h2>
+    <label>Name: <input id="name-input" type="text"></label><br>
+    <label>Category:
+      <select id="category-select"></select>
+      <input id="new-category-input" type="text" placeholder="New category">
+      <button id="add-category-button">Add</button>
+    </label><br>
+    <label>Description:<br>
       <textarea id="description-input"></textarea>
-      <div class="form-group"><label>URL</label><input id="url-input" maxlength="50"></div>
-      <div class="form-group"><label>Designer</label><input id="designer-input" maxlength="50"></div>
-      <div class="form-group"><label>PM</label><input id="pm-input" maxlength="50"></div>
-      <div class="form-group"><label>Eng Lead</label><input id="eng-input" maxlength="50"></div>
-      <div class="form-group"><label>Connect To</label>
-        <div id="connect-to-select" class="connect-to-select"></div>
-      </div>
-      <div id="last-updated-text" class="last-updated"></div>
-      <div style="display: flex; gap: 8px;">
-        <button id="save-description-button">Save</button>
-        <button id="delete-node-button" style="background-color: #dc3545; color: white;">Delete</button>
-      </div>
+    </label><br>
+    <label>URL: <input id="url-input" type="text"></label><br>
+    <label>Designer: <input id="designer-input" type="text"></label><br>
+    <label>PM: <input id="pm-input" type="text"></label><br>
+    <label>Engineer: <input id="eng-input" type="text"></label><br>
+    <div>
+      <strong>Connect To:</strong><br>
+      <div id="connect-to-select"></div>
     </div>
+    <div id="last-updated-text"></div>
+    <button id="save-description-button">Save</button>
+    <button id="delete-node-button">Delete</button>
   </div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="api.js"></script>
-  <script src="sidebar.js"></script>
   <script src="graph.js"></script>
-  <script>
-    // Make SVG always fill the viewport, and update on resize.
-    function resizeSVG() {
-      const svg = document.getElementById('network-svg');
-      svg.setAttribute('width', window.innerWidth);
-      svg.setAttribute('height', window.innerHeight);
-    }
-    window.addEventListener('resize', resizeSVG);
-    resizeSVG();
-    // Hand tuning tip: You can clamp min/max dimensions if you want to avoid extreme shapes.
-  </script>
+  <script src="sidebar.js"></script>
 </body>
 </html>
