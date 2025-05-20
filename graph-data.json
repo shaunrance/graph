@@ -1,54 +1,1178 @@
 {
-  "nodes": [
-    {
-      "id": "Ingest Service",
-      "label": "Ingest Service",
-      "category": "Ingest",
-      "url": "",
-      "designer": "",
-      "pm": "a",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 12:20:27 PM"
-    },
-    {
-      "id": "Transcoder",
-      "label": "Transcoder",
-      "category": "Processing",
-      "url": "asdf",
-      "designer": "",
-      "pm": "",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 10:45:21 AM"
-    },
-    {
-      "id": "Asset Storage",
-      "label": "Asset Storage",
-      "category": "Distribution",
-      "url": "",
-      "designer": "",
-      "pm": "",
-      "eng": "",
-      "description": "",
-      "updated": "5/16/2025, 5:33:08 PM"
+    "nodes": [
+        {
+            "id": "Ingest Service",
+            "label": "Watson",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "a",
+            "eng": "",
+            "description": "Watson is the tool to track content-related Deals, Contracts, & Options. It provides company-wide visibility and standardization of tracking content-related deal negotiations across all buying teams.",
+            "updated": "5\/18\/2025, 2:44:01 PM"
+        },
+        {
+            "id": "Transcoder",
+            "label": "Gravity",
+            "category": "Finance",
+            "url": "asdf",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Gravity provides functionality to create budgets and forecasts for content spend and creates slugs to be filled in as we define our Programming slate.",
+            "updated": "5\/18\/2025, 2:55:17 PM"
+        },
+        {
+            "id": "Asset Storage",
+            "label": "Prequel",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Prequel is used to track pitches & submissions accessible by the Buying / Creative teams and their various partners they include for the consideration process. It's also used to track talent we may consider for future projects.",
+            "updated": "5\/18\/2025, 3:27:07 PM"
+        },
+        {
+            "id": "Node 4",
+            "label": "Orion",
+            "category": "Finance",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A programming tool that helps CS&A and Creatives determine the ideal programming schedule. Orion Helps us Visualize the Information Coming from Gravity",
+            "updated": "5\/18\/2025, 2:38:33 PM"
+        },
+        {
+            "id": "Node 5",
+            "label": "Moneyball",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Moneyball is a financial application which the Content Accounting team uses to manage the accounting related to producing and licensing content for Netflix.",
+            "updated": "5\/18\/2025, 2:45:45 PM"
+        },
+        {
+            "id": "Node 6",
+            "label": "Production Finance Hub",
+            "category": "Production",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Budgets Insights navigation bar making it easy to move between these modules for a given title.  share a common ,  Cash   Flow , and",
+            "updated": "5\/18\/2025, 2:44:07 PM"
+        },
+        {
+            "id": "Node 7",
+            "label": "Rights",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Rights allows Netflix to define and understand what we own, can exhibit, purchased (Rights In) or sold, and sub-licensed (Rights Out) for both Content and Music.",
+            "updated": "5\/18\/2025, 2:45:10 PM"
+        },
+        {
+            "id": "Node 8",
+            "label": "Talent Finance",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Talent Finance is the tool the Contingent Compensation team uses to track, facilitate, and interpret Talent Finance deal terms.",
+            "updated": "5\/18\/2025, 2:43:49 PM"
+        },
+        {
+            "id": "Node 9",
+            "label": "Songbird",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A unified music product for the studio side of Netflix.",
+            "updated": "5\/18\/2025, 2:46:40 PM"
+        },
+        {
+            "id": "Node 10",
+            "label": "Residuals",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Residuals is the tool the Residuals Team uses to setup and facilitate mandated payments to Hollywood Unions (i.e., guilds) based on how we exploit content on our service.",
+            "updated": "5\/18\/2025, 2:45:36 PM"
+        },
+        {
+            "id": "Node 11",
+            "label": "Amadeus",
+            "category": "Content Controllership",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Amadeus calculates and manages music payments and accruals to collection societies and provides critical payment workflows.",
+            "updated": "5\/18\/2025, 2:46:29 PM"
+        },
+        {
+            "id": "Node 12",
+            "label": "New Submission",
+            "category": "New Submission",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 3:24:36 PM"
+        },
+        {
+            "id": "Node 13",
+            "label": "Slate Manager",
+            "category": "Production",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Slate Manager consolidates the details of how we produce our content, into a single streamlined experience.",
+            "updated": "5\/18\/2025, 3:37:21 PM"
+        },
+        {
+            "id": "Node 14",
+            "label": "Production Center",
+            "category": "Production",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Production Center is our external facing application that helps streamline Production office workflows, aid in file delivery and collaboration with the studio.",
+            "updated": "5\/18\/2025, 3:28:39 PM"
+        },
+        {
+            "id": "Node 15",
+            "label": "Netflix Production Manual",
+            "category": "Production",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Netflix Production Manual is your Production’s resource for guidelines on producing content for Netflix Owned Originals globally.",
+            "updated": "5\/18\/2025, 3:28:29 PM"
+        },
+        {
+            "id": "Node 16",
+            "label": "Netflix VFX Shotgrid",
+            "category": "VFX",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Shotgrid Software makes project management and pipeline tools that help creative studios track, schedule, review, collaborate, and manage their digital assets.",
+            "updated": "5\/18\/2025, 3:37:37 PM"
+        },
+        {
+            "id": "Node 17",
+            "label": "Script Breakdown",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "",
+            "updated": "5\/18\/2025, 3:31:37 PM"
+        },
+        {
+            "id": "Node 18",
+            "label": "Netflix Studio Account",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Netflix Studio Account is our partners's gateway to access the Netflix Studio tools they use when working with Netflix.",
+            "updated": "5\/18\/2025, 3:31:51 PM"
+        },
+        {
+            "id": "Node 19",
+            "label": "Starship",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Starship is a self-service administrative tool that grants authorization throughout the Netflix app ecosystem.",
+            "updated": "5\/18\/2025, 3:32:06 PM"
+        },
+        {
+            "id": "Node 20",
+            "label": "Hubble",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Hubble is a centralized portal for Talent across all Netflix internal applications. Its features include Talent search, discovery the ability to export lists of Talent.",
+            "updated": "5\/18\/2025, 3:32:18 PM"
+        },
+        {
+            "id": "Node 21",
+            "label": "Vendor HQ",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Vendor HQ is a vendor management tool designed to simplify the discovery, onboarding, and management of vendors who work with Netflix.",
+            "updated": "5\/18\/2025, 3:32:33 PM"
+        },
+        {
+            "id": "Node 22",
+            "label": "Workstation Manager",
+            "category": "Foundations",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "UI that allows users to access remote workstations pre- configured with software. In some cases are connected to Netflix-built pipelines for media exchanges.",
+            "updated": "5\/18\/2025, 3:32:47 PM"
+        },
+        {
+            "id": "Node 23",
+            "label": "NetFX",
+            "category": "VFX",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The NetFX Platform is a combination of hardware, software, compute, render, storage, pipeline, and operations that all comes together to enable artists to complete visual effects work.",
+            "updated": "5\/18\/2025, 3:33:58 PM"
+        },
+        {
+            "id": "Node 24",
+            "label": "Talent Hub",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Talent Hub is an Airtable solution that seeks to improve title management decision- making around the selection of Talent while mitigating risks when crewing across regions within highly compressed markets.",
+            "updated": "5\/18\/2025, 3:35:06 PM"
+        },
+        {
+            "id": "Node 25",
+            "label": "Asset Spotting",
+            "category": "Animation",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Asset Spotting supports the editorial process by providing a centralized place to list and identify assets within an animatic and generate breakdown lists.",
+            "updated": "5\/18\/2025, 3:36:32 PM"
+        },
+        {
+            "id": "Node 26",
+            "label": "Content Hub",
+            "category": "Animation",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Content Hub is a central, secure place to store and share media. This is where our partners deliver assets for archival as well as in-progress assets (liked a locked cut) to Netflix, so downstream teams can begin their work.",
+            "updated": "5\/18\/2025, 6:04:04 PM"
+        },
+        {
+            "id": "Node 27",
+            "label": "Partner Delivery",
+            "category": "Animation",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Partner Delivery gets content to and from ShotGrid to vendors via Content Hub.",
+            "updated": "5\/18\/2025, 3:38:14 PM"
+        },
+        {
+            "id": "Node 28",
+            "label": "Animation Connect",
+            "category": "Animation",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Animation Connect is a marketplace for our talent and shows. Our goal is to create a universe where NAS talent can build a community off their creations and discover exciting opportunities to grow within Netflix.",
+            "updated": "5\/18\/2025, 3:38:38 PM"
+        },
+        {
+            "id": "Node 29",
+            "label": "Edit Bay",
+            "category": "Animation",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Edit Bay is the hub for tracking, managing, and sharing editorial cuts in Animation.",
+            "updated": "5\/18\/2025, 3:38:50 PM"
+        },
+        {
+            "id": "Node 30",
+            "label": "Asset QC",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Netflix quality control platform for the evaluation of content assets at scale.",
+            "updated": "5\/18\/2025, 3:41:27 PM"
+        },
+        {
+            "id": "Node 31",
+            "label": "AVA",
+            "category": "Promotional AV + Media",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "AVA allows users to select frame-specific stills directly from the viewable, but will also suggest candidate frames.",
+            "updated": "5\/18\/2025, 3:58:51 PM"
+        },
+        {
+            "id": "Node 32",
+            "label": "Backlot",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A suite of tools and services to order, deliver, and manage video, audio, and text content assets for the Netflix product.",
+            "updated": "5\/18\/2025, 4:09:57 PM"
+        },
+        {
+            "id": "Node 33",
+            "label": "Content Localization Portal",
+            "category": "Dubbing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The CL Portal is a project management application designed to house all apps and pieces of the dub process. Tools include Script Authoring, Dub Talent List & Casting Approval",
+            "updated": "5\/18\/2025, 3:46:39 PM"
+        },
+        {
+            "id": "Node 34",
+            "label": "Authoring Tool",
+            "category": "Dubbing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Dub script authoring allows Netflix partners to transcribe, translate, tag annotations, and provide frame accurate dialog events as the base foundation in which dubs will be created.",
+            "updated": "5\/18\/2025, 3:45:20 PM"
+        },
+        {
+            "id": "Node 35",
+            "label": "Dub Talent List",
+            "category": "Dubbing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Dub Talent List is a lightweight application used for the streamlined creation of a dub talent list.",
+            "updated": "5\/18\/2025, 3:45:39 PM"
+        },
+        {
+            "id": "Node 36",
+            "label": "Partner Information Portal",
+            "category": "Dubbing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "PIP is a Wiki collection of our Dubbing Partners data. It allows our partners to enter and update their information in a self-serve manner.",
+            "updated": "5\/18\/2025, 3:46:13 PM"
+        },
+        {
+            "id": "Node 37",
+            "label": "Grand Bazaar",
+            "category": "Dubbing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Grand Bazaar is a proprietary bidding tool used to capture localization costs for Netflix content.",
+            "updated": "5\/18\/2025, 3:46:35 PM"
+        },
+        {
+            "id": "Node 38",
+            "label": "Originator",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Originator is the tool through which timed text assets going through through Direct-Timed-Text (DTT) are created.",
+            "updated": "5\/18\/2025, 3:51:50 PM"
+        },
+        {
+            "id": "Node 39",
+            "label": "Clips",
+            "category": "Promotional AV + Media",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Clips can be used by external partners, agencies, and internal Netflix employees to clip and pull footage from long form content for the purposes of creating trailers, hooks, teasers etc.",
+            "updated": "5\/18\/2025, 3:49:44 PM"
+        },
+        {
+            "id": "Node 40",
+            "label": "Terminology",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Key Names and Phrases (KNP) tool helps ensure consistency in terminology across the different localized assets (synopses, trailers, subtitles, dubbed audio, and forced narratives) of Netflix titles.",
+            "updated": "5\/18\/2025, 3:50:31 PM"
+        },
+        {
+            "id": "Node 41",
+            "label": "Title Localization",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Title Localization (a.k.a. Tiloc) is for managing localization of series and standalone titles.",
+            "updated": "5\/18\/2025, 3:50:50 PM"
+        },
+        {
+            "id": "Node 42",
+            "label": "Lucid",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Lucid is our task and translation management platform. Its suite includes: KNP , Glossary Management and TM Explorer.",
+            "updated": "5\/18\/2025, 3:56:45 PM"
+        },
+        {
+            "id": "Node 43",
+            "label": "CCM",
+            "category": "Marketing Supply Chain",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "An information and project management system designed to remove reliance on siloed tools as part of our daily workflows, increase visibility across the organization, and connect Marketing assets across the globe.",
+            "updated": "5\/18\/2025, 4:02:01 PM"
+        },
+        {
+            "id": "Node 44",
+            "label": "Lex",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "LEX is a data tool for text- based promotional assets, in other words, it is a multi- dimensional dashboard that allows users to track several performance metrics to understand how a candidate suite of synopses for a specific title did.",
+            "updated": "5\/18\/2025, 3:53:16 PM"
+        },
+        {
+            "id": "Node 45",
+            "label": "Dexter",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Dexter allows for flexible routes to setup content and distribute metadata to the product to support A/B tests and other use cases.",
+            "updated": "5\/18\/2025, 3:53:27 PM"
+        },
+        {
+            "id": "Node 46",
+            "label": "Application Loc Hub",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Application Localization Hub (fka Obelix) is a string repository that manages, serves, and processes translation of all UI strings. This is primarily a developer- facing product.",
+            "updated": "5\/18\/2025, 3:53:44 PM"
+        },
+        {
+            "id": "Node 47",
+            "label": "Loc Reference Tool",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Localization Reference Tool is an aggregate of information cards pulled from other internal tools to provide context for localization.",
+            "updated": "5\/18\/2025, 3:53:58 PM"
+        },
+        {
+            "id": "Node 48",
+            "label": "Grand Arcade",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A tool to help “buyers” from product and marketing track costs and overages when working with agencies during the conceptual phase of a/v, artwork, etc.",
+            "updated": "5\/18\/2025, 3:54:45 PM"
+        },
+        {
+            "id": "Node 49",
+            "label": "Muse",
+            "category": "Promotional AV + Media",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Asset level performance insights to help analyze title performance and inform future design strategies.",
+            "updated": "5\/18\/2025, 3:54:58 PM"
+        },
+        {
+            "id": "Node 50",
+            "label": "Serenity",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Serenity is a streamlined video asset localization and assembly tool.",
+            "updated": "5\/18\/2025, 3:57:07 PM"
+        },
+        {
+            "id": "Node 51",
+            "label": "Planning & Ordering Portal",
+            "category": "Marketing Supply Chain",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Planning & Ordering Portal (POP) creates centralized visibility into the assets that are planned for a campaign, provides a way to order localized versions of those assets, and consolidates links to final assets & source files.",
+            "updated": "5\/18\/2025, 3:59:37 PM"
+        },
+        {
+            "id": "Node 52",
+            "label": "Iris",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Iris houses artwork for all titles on service. It provides direct access to artwork allows users to associate associate artwork assets with MIDs, Languages, Countries, etc.",
+            "updated": "5\/18\/2025, 4:02:11 PM"
+        },
+        {
+            "id": "Node 53",
+            "label": "Artwork Portal",
+            "category": "Marketing Supply Chain",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "An Artwork fulfillment and QC tool that enables users to request Originals artwork assets for Conceptual, Production and Marketing project types.",
+            "updated": "5\/18\/2025, 4:02:20 PM"
+        },
+        {
+            "id": "Node 54",
+            "label": "MUT",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The app for generating Netflix mockups. A library of every screen on every Netflix app on every device (TV, Web, iPhone and Android).",
+            "updated": "5\/18\/2025, 4:00:06 PM"
+        },
+        {
+            "id": "Node 55",
+            "label": "VanDAM",
+            "category": "Publicity",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "VanDAM is a proprietary digital asset management system utilized by over 1,200 monthly users across Creative Production, Marketing, Comms, and external partners.",
+            "updated": "5\/18\/2025, 4:04:36 PM"
+        },
+        {
+            "id": "Node 56",
+            "label": "PAL",
+            "category": "Publicity",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "PAL is the centralized platform for discovering, searching, and sharing final promotional assets created by Product and Marketing teams.",
+            "updated": "5\/18\/2025, 4:01:46 PM"
+        },
+        {
+            "id": "Node 57",
+            "label": "Creative Review",
+            "category": "Marketing Supply Chain",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Creative Review is an app for reviewing, finishing, and approving creative. Creative review was built for all marketing teams, product teams, and their agencies.",
+            "updated": "5\/18\/2025, 4:02:46 PM"
+        },
+        {
+            "id": "Node 58",
+            "label": "Media Center",
+            "category": "Marketing Planning & Distribution",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Media Center enables journalists and media critics to easily discover news about our company and to independently access information about Netflix titles.",
+            "updated": "5\/18\/2025, 4:03:43 PM"
+        },
+        {
+            "id": "Node 59",
+            "label": "Marketing Email Maker",
+            "category": "Marketing Planning & Distribution",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Marketing Email Maker is a tool that allows you to create bespoke Netflix-branded emails for Creative Marketing and Publicity teams to send internally or externally for debuts and other press outreach.",
+            "updated": "5\/18\/2025, 4:04:09 PM"
+        },
+        {
+            "id": "Node 60",
+            "label": "Socialite",
+            "category": "Marketing Planning & Distribution",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A distribution planning application for social content that allows teams across all of MarComms to collaborate on social campaigns.",
+            "updated": "5\/18\/2025, 4:06:08 PM"
+        },
+        {
+            "id": "Node 61",
+            "label": "Newsroom",
+            "category": "Publicity",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Newsroom houses all Netflix announcements about content, product, business, our social impact work and beyond.",
+            "updated": "5\/18\/2025, 4:05:02 PM"
+        },
+        {
+            "id": "Node 62",
+            "label": "Tudum CMS",
+            "category": "Publicity",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "The Tudum CMS in Contentful powers the Tudum experience that consumers see. It houses all of the site’s editorial content that is not dynamically populated from the Product, and it is where teams work to assemble that content.",
+            "updated": "5\/18\/2025, 4:05:12 PM"
+        },
+        {
+            "id": "Node 63",
+            "label": "Marcomms HQ",
+            "category": "Marketing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "MarC aggregates and summarizes key information about campaign plans from the apps that MarComms already uses. Now you can easily view a summary of campaign plans across markets and teams. omms HQ is a dashboard that",
+            "updated": "5\/18\/2025, 4:06:03 PM"
+        },
+        {
+            "id": "Node 64",
+            "label": "Campaign Admin",
+            "category": "Marketing",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Campaign Admin is a marketing app used to generate and search for Marketing Campaign IDs for use in all non-single title campaigns.",
+            "updated": "5\/18\/2025, 4:06:32 PM"
+        },
+        {
+            "id": "Node 65",
+            "label": "Title Insights",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Title-level information and metrics about how content is performing post it's launch.",
+            "updated": "5\/18\/2025, 4:07:06 PM"
+        },
+        {
+            "id": "Node 66",
+            "label": "Hopper",
+            "category": "Business and Legal Affairs",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "A tool used by our Content Protection team to support semi- automatic fingerprint generation and copyright enforcement across UGC platforms",
+            "updated": "5\/18\/2025, 4:07:28 PM"
+        },
+        {
+            "id": "Node 67",
+            "label": "Content Preview",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Content Preview allows internal users to provision access to content and promotional experiences for on-service QA or pre-release screenings.",
+            "updated": "5\/18\/2025, 4:08:09 PM"
+        },
+        {
+            "id": "Node 68",
+            "label": "Athena",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Generates predictions that are indicative of popularity for title(s) using a knowledge base of connected metadata. AKA creates the 28DW and AVS Metrics",
+            "updated": "5\/18\/2025, 4:08:32 PM"
+        },
+        {
+            "id": "Node 69",
+            "label": "NTV",
+            "category": "Content Intelligence",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "NTV (or Netflix Title Visibility) is a view-only application that gives high-level information into the launch readiness of a given title as well as how it will appear on our service in different countries around the world.",
+            "updated": "5\/18\/2025, 4:08:43 PM"
+        },
+        {
+            "id": "Node 70",
+            "label": "Metadata UI",
+            "category": "Metadata",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Tool used to edit and manage title related metadata (Tier/Originals Flags).",
+            "updated": "5\/18\/2025, 4:09:19 PM"
+        },
+        {
+            "id": "Node 71",
+            "label": "Ratings UI",
+            "category": "Metadata",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Ratings UI is the source of truth & one-stop shop for all things Ratings within the ecosystem.",
+            "updated": "5\/18\/2025, 4:09:32 PM"
+        },
+        {
+            "id": "Node 72",
+            "label": "Graffiti",
+            "category": "Metadata",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Graffiti is an editorial metadata management tool designed to enhance content learning and insights. It supports various tagging workflows, including time- based tagging, human-in-the- loop algorithm classification, and self-serve tag minting",
+            "updated": "5\/18\/2025, 4:09:51 PM"
+        },
+        {
+            "id": "Node 73",
+            "label": "Turbo",
+            "category": "Metadata",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Turbo is an app to create and manage Collections. Collections are groups of titles that are somehow related.",
+            "updated": "5\/18\/2025, 4:10:14 PM"
+        },
+        {
+            "id": "Node 74",
+            "label": "CC UI",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Content Catalog UI aims to centralize asset metadata, experience and scheduling tasks in one application, significantly streamlining title experience management.",
+            "updated": "5\/18\/2025, 4:10:29 PM"
+        },
+        {
+            "id": "Node 75",
+            "label": "Metadata Fulfillment UI",
+            "category": "Uncategorized",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Allows vendors and content teams to manage a subset of editorial tags for our content in a secure and streamlined manner.",
+            "updated": "5\/18\/2025, 4:10:46 PM"
+        },
+        {
+            "id": "Node 76",
+            "label": "Nutshell",
+            "category": "Globalization",
+            "url": "",
+            "designer": "",
+            "pm": "",
+            "eng": "",
+            "description": "Nutshell is where writers create synopses in English for every title on the service, plus support A/B testing.",
+            "updated": "5\/18\/2025, 4:11:17 PM"
+        }
+    ],
+    "links": [
+        {
+            "source": "Ingest Service",
+            "target": "Node 6",
+            "description": ""
+        },
+        {
+            "source": "Ingest Service",
+            "target": "Node 7",
+            "description": ""
+        },
+        {
+            "source": "Ingest Service",
+            "target": "Node 8",
+            "description": ""
+        },
+        {
+            "source": "Node 6",
+            "target": "Node 8",
+            "description": ""
+        },
+        {
+            "source": "Node 7",
+            "target": "Node 5",
+            "description": ""
+        },
+        {
+            "source": "Node 7",
+            "target": "Node 9",
+            "description": ""
+        },
+        {
+            "source": "Node 5",
+            "target": "Node 10",
+            "description": ""
+        },
+        {
+            "source": "Node 9",
+            "target": "Node 11",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Ingest Service",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Node 4",
+            "description": ""
+        },
+        {
+            "source": "Transcoder",
+            "target": "Node 5",
+            "description": ""
+        },
+        {
+            "source": "Node 12",
+            "target": "Asset Storage",
+            "description": ""
+        },
+        {
+            "source": "Asset Storage",
+            "target": "Transcoder",
+            "description": ""
+        },
+        {
+            "source": "Asset Storage",
+            "target": "Node 13",
+            "description": ""
+        },
+        {
+            "source": "Node 14",
+            "target": "Node 13",
+            "description": ""
+        },
+        {
+            "source": "Node 14",
+            "target": "Node 15",
+            "description": ""
+        },
+        {
+            "source": "Node 13",
+            "target": "Node 14",
+            "description": ""
+        },
+        {
+            "source": "Node 13",
+            "target": "Node 16",
+            "description": ""
+        },
+        {
+            "source": "Node 13",
+            "target": "Node 26",
+            "description": ""
+        },
+        {
+            "source": "Node 16",
+            "target": "Node 13",
+            "description": ""
+        },
+        {
+            "source": "Node 27",
+            "target": "Node 26",
+            "description": ""
+        },
+        {
+            "source": "Node 30",
+            "target": "Node 32",
+            "description": ""
+        },
+        {
+            "source": "Node 33",
+            "target": "Node 32",
+            "description": ""
+        },
+        {
+            "source": "Node 33",
+            "target": "Node 34",
+            "description": ""
+        },
+        {
+            "source": "Node 33",
+            "target": "Node 35",
+            "description": ""
+        },
+        {
+            "source": "Node 33",
+            "target": "Node 36",
+            "description": ""
+        },
+        {
+            "source": "Node 33",
+            "target": "Node 37",
+            "description": ""
+        },
+        {
+            "source": "Node 38",
+            "target": "Node 32",
+            "description": ""
+        },
+        {
+            "source": "Node 38",
+            "target": "Node 43",
+            "description": ""
+        },
+        {
+            "source": "Node 42",
+            "target": "Node 43",
+            "description": ""
+        },
+        {
+            "source": "Node 50",
+            "target": "Node 43",
+            "description": ""
+        },
+        {
+            "source": "Node 31",
+            "target": "Node 52",
+            "description": ""
+        },
+        {
+            "source": "Node 51",
+            "target": "Node 43",
+            "description": ""
+        },
+        {
+            "source": "Node 51",
+            "target": "Node 53",
+            "description": ""
+        },
+        {
+            "source": "Node 43",
+            "target": "Node 38",
+            "description": ""
+        },
+        {
+            "source": "Node 43",
+            "target": "Node 42",
+            "description": ""
+        },
+        {
+            "source": "Node 43",
+            "target": "Node 50",
+            "description": ""
+        },
+        {
+            "source": "Node 43",
+            "target": "Node 55",
+            "description": ""
+        },
+        {
+            "source": "Node 43",
+            "target": "Node 56",
+            "description": ""
+        },
+        {
+            "source": "Node 52",
+            "target": "Node 56",
+            "description": ""
+        },
+        {
+            "source": "Node 53",
+            "target": "Node 52",
+            "description": ""
+        },
+        {
+            "source": "Node 53",
+            "target": "Node 54",
+            "description": ""
+        },
+        {
+            "source": "Node 53",
+            "target": "Node 56",
+            "description": ""
+        },
+        {
+            "source": "Node 57",
+            "target": "Node 56",
+            "description": ""
+        },
+        {
+            "source": "Node 55",
+            "target": "Node 56",
+            "description": ""
+        },
+        {
+            "source": "Node 55",
+            "target": "Node 60",
+            "description": ""
+        },
+        {
+            "source": "Node 63",
+            "target": "Node 60",
+            "description": ""
+        },
+        {
+            "source": "Node 60",
+            "target": "Node 55",
+            "description": ""
+        },
+        {
+            "source": "Node 60",
+            "target": "Node 63",
+            "description": ""
+        },
+        {
+            "source": "Node 64",
+            "target": "Node 60",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 30",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 31",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 33",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 38",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 39",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 58",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 67",
+            "description": ""
+        },
+        {
+            "source": "Node 32",
+            "target": "Node 72",
+            "description": ""
+        },
+        {
+            "source": "Node 26",
+            "target": "Node 30",
+            "description": ""
+        },
+        {
+            "source": "Node 26",
+            "target": "Node 25",
+            "description": ""
+        },
+        {
+            "source": "Node 26",
+            "target": "Node 31",
+            "description": ""
+        },
+        {
+            "source": "Node 26",
+            "target": "Node 32",
+            "description": ""
+        },
+        {
+            "source": "Node 26",
+            "target": "Node 27",
+            "description": ""
+        }
+    ],
+    "categories": {
+        "Dubbing": "#8A9DFF",
+        "Finance": "#006DFF",
+        "Content Intelligence": "#FFDE59",
+        "Business and Legal Affairs": "#32C896",
+        "Content Controllership": "#003737",
+        "Production": "#50AAFF",
+        "New Submission": "#54ac09",
+        "VFX": "#005FE6",
+        "Foundations": "#8C52FF",
+        "Uncategorized": "#CCCCCC",
+        "Animation": "#A55F00",
+        "Localization": "#B978E6",
+        "Promotional AV + Media": "#FF646E",
+        "Globalization": "#B978E6",
+        "Marketing Supply Chain": "#05367F",
+        "Publicity": "#F68ECE",
+        "Marketing Planning & Distribution": "#F05E23",
+        "Marketing": "#E50914",
+        "Metadata": "#494949"
     }
-  ],
-  "links": [
-    {
-      "source": "Ingest Service",
-      "target": "Transcoder",
-      "description": ""
-    },
-    {
-      "source": "Asset Storage",
-      "target": "Transcoder",
-      "description": ""
-    },
-    {
-      "source": "Transcoder",
-      "target": "Asset Storage",
-      "description": ""
-    }
-  ]
 }

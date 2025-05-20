@@ -25,15 +25,15 @@ let zoomContainer = svg.append("g").attr("class", "zoom-container");
 svg.append("defs").append("marker")
   .attr("id", "arrowhead")
   .attr("viewBox", "-0 -5 10 10")
-  .attr("refX", 28)
+  .attr("refX", 45)
   .attr("refY", 0)
   .attr("orient", "auto")
-  .attr("markerWidth", 8)
-  .attr("markerHeight", 8)
+  .attr("markerWidth", 6)
+  .attr("markerHeight", 6)
   .attr("xoverflow", "visible")
   .append("svg:path")
   .attr("d", "M 0,-5 L 10,0 L 0,5")
-  .attr("fill", "#999")
+  .attr("fill", "#FFFFFF")
   .style("stroke", "none");
 
 // Zoom behavior
@@ -74,7 +74,7 @@ function restartSimulation() {
     ).strength(0.03));
 
   link = zoomContainer.append("g")
-    .attr("stroke", "#999")
+    .attr("stroke", "#FFFFFF")
     .attr("stroke-opacity", 0.6)
     .selectAll("line")
     .data(links)
